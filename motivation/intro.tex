@@ -9,15 +9,15 @@ understanding  graph structures~\cite{Bollacker_Freebase_2008,Krogan_Global_2006
 information discovery and propagation~\cite{Zhao_Detecting_2014}, advertising and marketing~\cite{Kempe_Maximizing_2003}, among many others.
 When compared to sharing the results of data mining, data publishing gives greater flexibility because recipients can perform unlimited analysis, data explosion and novel methods. However, the publishing of these uncertain graphs might violate participants' privacy due to the existence of sensitive information.   
 
-\begin{figure}
+\begin{figure}[!htb]
     \subfigure[Social Trust Network]{\label{fig:socialNetwork}
-      \begin{minipage}[l]{0.47\columnwidth}
+      \begin{minipage}[l]{0.4\columnwidth}
         \centering
         \includegraphics[height=3cm]{ill/SocialNetwork.pdf}
       \end{minipage}
   	}
     \subfigure[B2B Network]{\label{fig:b2bNetwork}
-      \begin{minipage}[l]{0.47\columnwidth}
+      \begin{minipage}[l]{0.4\columnwidth}
         \centering
         \includegraphics[height=3cm]{ill/B2BNetwork.pdf}
       \end{minipage}
@@ -60,24 +60,24 @@ Certainly, information about a company's interactions with other companies is co
 These scenarios show the immediate need for efficient methods privacy preserving uncertain graph publishing, where sanitation or anonymization is applied to the input uncertain graph before publishing. Despite the number of graph anonymization techniques have been proposed~\cite{Liu_Towards_2008, Boldi_Injecting_2012,  Mittal_Preserving_2013, Nguyen_Anonymizing_2015, Liu_Privacy_2009, Ying_Randomizing_2008, Ninggal_Utility_2015,  Bonchi_Identity_2014}, the ignorance of edge uncertainty makes them inefficient for uncertain graph sanitation task. The inefficiency can be due to various reasons ranging from wrong assumption of privacy attacks to improper utility loss metrics. More specifically, the key new challenges in the context of uncertain graphs include:
 
 
-\begin{figure}
-	%\captionsetup{justification=centering,margin=0cm}
-	\centering
-    \includegraphics[scale=0.3]{ill/motivation_1.eps}
-    \vspace{-15pt}
-    \caption{Example of vulnerability due to edge uncertainties.}
-    \label{fig:motivation}
-    \vspace{-25pt}
-\end{figure}
+% \begin{figure}
+% 	%\captionsetup{justification=centering,margin=0cm}
+% 	\centering
+%     \includegraphics[scale=0.3]{ill/motivation_1.eps}
+%     \vspace{-15pt}
+%     \caption{Example of vulnerability due to edge uncertainties.}
+%     \label{fig:motivation}
+%     \vspace{-25pt}
+% \end{figure}
 
 \vspace{2mm}\hspace{-1em}
-\textbf{$\bullet$ Privacy Attacks leveraging Edge Uncertainty:} 
-In Figure \ref{fig:motivation}, we show two instances of released (and {\em ``hopefully anonymized''}) graphs with the same exact topology. 
-In Figure \ref{fig:motivation}(a), the graph is deterministic, while in Figure \ref{fig:motivation}(b), the graph is uncertain with probabilities associated to its edges. 
-The goal of anonymization is to make nodes indistinguishable in spite of external information. 
-We also assume that the adversary has the same knowledge in both cases, i.e., user {\tt Ana} has a degree of $3$ in the original graph. 
-As indicated in the figure, in the case of the deterministic graph, 
-the adversary can \emph{not} re-identify Ana with high confidence since there are two nodes \{{\tt a}, {\tt c}\} each with the matching degree $3$. 
+% \textbf{$\bullet$ Privacy Attacks leveraging Edge Uncertainty:} 
+% In Figure \ref{fig:motivation}, we show two instances of released (and {\em ``hopefully anonymized''}) graphs with the same exact topology. 
+% In Figure \ref{fig:motivation}(a), the graph is deterministic, while in Figure \ref{fig:motivation}(b), the graph is uncertain with probabilities associated to its edges. 
+% The goal of anonymization is to make nodes indistinguishable in spite of external information. 
+% We also assume that the adversary has the same knowledge in both cases, i.e., user {\tt Ana} has a degree of $3$ in the original graph. 
+% As indicated in the figure, in the case of the deterministic graph, 
+% the adversary can \emph{not} re-identify Ana with high confidence since there are two nodes \{{\tt a}, {\tt c}\} each with the matching degree $3$. 
 However, in the uncertain case, the revealed edge uncertainties make the two nodes follow different degree distributions, and thus  
 the adversary has more confidence (around 90\%) that {\tt Ana} maps to Node {\tt a}. 
 
