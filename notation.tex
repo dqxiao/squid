@@ -1,0 +1,90 @@
+\section{Problem Definition}
+\label{sec:notation}
+
+In this section, we present the notations, definitions and the problem formulation.  
+% In this section, we present the models of uncertain graph, privacy criteria, and utility metric. We then present the formal formulation of 
+% uncertain graph anonymization problem. 
+
+\subsection{Uncertain Graph}
+% Let $\mathcal{G}=(V,E,\mathit{p})$ be an uncertain graph, where $V$ is the set of nodes, $E$ is the set of edges, and function $\mathit{p}: E \rightarrow [0,1]$ assigns a  probability of existence to each edge, denoted as $\mathit{p}(e)$. 
+An uncertain graph $\mathcal{G}=(V,E,\mathit{p})$, is defined over a set of nodes $V$, a set of edges $E$, and a set of probabilities $\mathit{p}$ of edge existence. Following the literature, we consider the edge probabilities independent~\cite{Potamias_K_2010,,Zhao_Detecting_2014,Hua_Probabilistic_2010,Jin_Distance_2011}, and we assume \emph{possible-worlds} semantics~\cite{Colbourn_Colbourn_1987}. Specifically, the \emph{possible world} semantics interprets $\mathcal{G}$ as a set of possible deterministic graphs 
+$W(\mathcal{G}) = \{G_1, G_2, ..., G_n\}$, where each deterministic graph $G_i \in W(\mathcal{G})$ includes all vertices of $\mathcal{G}$ 
+and a subset of edges $E_{G_i} \subset E$.  
+The probability of observing any possible world $G_i=(V,E_{G_i}) \in W(\mathcal{G})$ is    
+\begin{equation*}
+    Pr[G_i]=\prod_{e \in E_{G_i}} {\mathit{p}(e)} \prod_{e \in E \setminus E_{G_i}} (1-\mathit{p}(e))
+\end{equation*}
+
+In this work, we assume the input uncertain graph undirected and contains no self-loops or multiple edges. 
+
+
+\subsection{Reliability-Based Utility Loss Metric}
+As be known to all, connectivity is a fundamental graph property and plays an important role in graph mining tasks such as locating $k-$nearest neighbor~\cite{Potamias_K_2010}, graph clustering~\cite{Asthana_Predicting_2004} and shortest paths detecting~\cite{Zhao_Detecting_2014}. The connectivity model has been shown to be able to yield better representation than degree sequence model~\cite{}. Intuitively, graph sanitation should not destroy the probabilistic connectivity structure of uncertain graphs.
+
+In uncertain graphs, the concept of reliability is used to generalize \emph{connectivity} by  capturing the probability that two given (sets of) nodes are reachable over all possible worlds of the uncertain graph as follows:
+\begin{definition}
+    \textbf{Two-Terminal Reliability~\cite{Colbourn_Colbourn_1987}}  Given an uncertain graph $\mathcal{G}$, and two distinct nodes $u$ and $v$  $\in~V$, the reliability of $(u,v)$ is defined as:
+        \begin{equation*}
+                R_{u,v}(\mathcal{G})= \sum_{G \in W(\mathcal{G})}  \mathcal{I}_{G}(u,v) Pr[G] 
+        \end{equation*}
+        
+    where $\mathcal{I}_{G}(u,v)$ is 1 iff $u$ and $v$ are contained in a connected component in $G$, and 0 otherwise.   
+    \label{d:reliability}
+\end{definition}
+
+Therefore, for a given anonymized output, we use its Two-Terminal Reliability Discrepancy, against the input one, to reflect its utility loss. The formal definition is given as follows. 
+\theoremstyle{definition}
+\begin{definition}
+    \textbf{Graph Reliability Discrepancy}
+        The reliability discrepancy of graph $\tilde{\mathcal{G}}=(V,E, \tilde{\mathit{p}})$, 
+    denoted as $\Delta(\tilde{\mathcal{G}})$, 
+    w.r.t. an original graph  $\mathcal{G}=(V,E,\mathit{p})$  is 
+    defined as the sum of the two-terminal reliability discrepancy over all node pair $(u,v) \in V_\mathcal{G}$.
+    \begin{equation*}
+        \Delta(\tilde{\mathcal{G}})=\sum_{(u,v) \in V_\mathcal{G} } |R_{u,v}(\mathcal{G})-R_{u,v}(\tilde{\mathcal{G}})|
+    \end{equation*}
+\end{definition}
+
+
+\subsection{Attack Model and Privacy Criteria}
+\label{sec:AMPC}
+In this paper, we focus on the ``identity disclosure problem"~\cite{Liu_Towards_2008} over uncertain graphs, which is one serious privacy leak concern when a graph dataset is published. Formally, give a published graph $G$, if and adversary can locate the target entity $t$ as a vertex $v$ of $G$ with a high probability via auxiliary information, we said that the identity of $t$ is disclosed. The popular assumption of auxiliary information is node degree~\cite{Liu_Towards_2008}. 
+
+Following the literature, we adopt the syntactic $\keobf$ criterion~\cite{Boldi_Injecting_2012} for privacy guarantee. 
+Analogous to the well known $k$-anonymity notion, $k$-obf requires to blend every vertex with \emph{other} fuzzy-matching nodes. 
+Compared to $k$-anonymity, $k$-obf, which is global and entropy-based quantification, is more adequate than the previous used local quantification based on a posteriori belief probabilities. An excellent discussion on $k$-obf was presented by Bonchi {\etal}~\cite{Bonchi_Identity_2014}. 
+Moreover, the introduction of a tolerance parameter $\epsilon$, which allows skipping up to $\epsilon * |V|$ nodes, makes it more practical. The skipped nodes might be extreme unique nodes, e.g., Trump in a Twitter network, whose obfuscation is almost impossible.
+The formal definition is as follows:
+\theoremstyle{definition}
+\begin{definition}
+	\textbf{\boldmath{$(k,\epsilon)$}-obf \cite{Boldi_Injecting_2012}}
+    Let $P$ be a vertex property (i.e., vertex degree in our work), $k \geq 1$ be a desired level of anonymity, and $\epsilon >0 $ be a tolerance parameter. 
+    An sanitized uncertain graph $\tilde{\mathcal{G}}$ is said to $k$-obfuscate a given vertex $v \in \mathcal{G}$ w.r.t $P$ if the entropy $H()$ of the distribution $Y_{P(v)}$ over the nodes 
+    of $\tilde{\mathcal{G}}$ is greater than or equals to $\log_{2}{k}$:
+    \begin{equation*}
+        H(Y_{P(v)}) \geq \log_{2}{k}.
+    \label{obfCon}
+    \end{equation*}
+The uncertain graph $\tilde{\mathcal{G}}$
+is $(k,\epsilon)$-obf w.r.t property $P$ 
+if it $k$-obfuscates at least $(1-\epsilon)|V|$ nodes in $\mathcal{G}$. 
+\label{def:obf}
+\end{definition} 
+
+\subsection{Problem Statement}
+% add one sentence to address this one 
+Given the above foundation, we can now formulate the addressed problem.  
+\begin{problem}
+	\textbf{Reliability-Preserving Uncertain Graph Anonymization}
+     Given an uncertain graph $\mathcal{G}=(V,E,\mathit{p})$ and anonymization parameters $k$ and $\epsilon$, 
+     the objective is to find a  $(k,\epsilon)$-obfuscated uncertain graph $\tilde{\mathcal{G}}=(V,E,\tilde{\mathit{p}})$ 
+     with minimal  $\Delta(\tilde{\mathcal{G}})$. That is:
+     \begin{equation*}
+             \begin{aligned}
+                 & \argmin_{\tilde{
+                \mathcal{G}}} & & \Delta(\tilde{\mathcal{G}}) \\
+                &  \text{Subject to} & &\tilde{\mathcal{G}} \text{~is~} (k,\epsilon)-obf
+            \end{aligned}
+     \end{equation*}
+     \label{prob:unobf}
+\end{problem}
