@@ -1,5 +1,8 @@
 rm *.aux 
 rm *.log 
 rm *.synctex.gz 
-rm *.bst
-rm *.cls 
+rm *.bbl
+rm *.blg
+rm *.pdf
+# rm *.bst
+# rm *.cls 
