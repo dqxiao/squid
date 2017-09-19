@@ -1,0 +1,33 @@
+\section{Privacy Via Chameleon}
+The results in the previous section demonstrate the huge utility loss in the perturbed representative instance after adding noise to provide privacy guarantee. In this section, we propose a novel uncertainty-aware algorithm called Chameleon that enables uncertainty-aware control over the noise injected into the \emph{original uncertain} graph. This qualifies Chameleon to provide enough privacy guarantee in better utility. First, we discuss the design of Chameleon, specifically how to integrate edge uncertainty. 
+
+
+
+\subsection{The Chameleon framework}
+\input{mainRoutine.tex}
+We now introduce the state-of-art perturbation algorithm~\cite{Boldi_Injecting_2012} that computes the noise needed to injected into the input \emph{determinitic} graph to obtain the desired privacy level. Each selected edge is altered on a stochastic variable drawn from a trunated Normal distribution, $R(\sigma)$. This distribution has density function proportional to the Normal distribution, with mean $0$ and variance $\sigma^2$. Targeting at high utility, the anonymization scheme aims at the smallest value of the uncertainty parameter $\sigma$ via a binary search, as shown in Algorithm~\ref{alg:Skeleton}. The core function of this process is the \texttt{GenObf} function which performs two core steps:
+\begin{itemize}
+    \item{Select a subset of edges subjects to further alteration;}
+    \item{Alter selected edges as computed amount of noise;}
+\end{itemize}
+
+The conventional schemes for adding noise is plausible if the operating edge probability is binary, which is unreasonable when dealing with uncertain graphs. Our goal is to develop a privacy mechanism that reduced the amount of noise that must be added to achieve a given privacy level for \emph{uncertain} graphs. Our insight is to shift an existing framework for anonymizing \emph{probabilistic} graphs by integrating uncertainty semantics into core steps. 
+
+In the reminder of this section, we discuss the shift of the edge selecting step and alteration steps. 
+
+\subsection{Edge Selection}
+Figuring out the optimal subset of edges that balances the privacy gain and the utility loss is a typical combinational optimization problem. It involves the consideration over the exponential number of edge combinations. Let alone the infinite possibilities of probability values on the selected edges, which further complicates the problem.
+
+In the context of deterministic graphs, various heuristics have been utilized ~\cite{Ying2009, casasprivacy, Ying_Randomizing_2008} to alleviate the combinational intractability. 
+These heuristics can be classified into two main categories: 
+(1)~{\em Anonymity-oriented} heuristics that suggest injecting larger perturbations to the edges associated with the less-anonymized (more-unique) 
+nodes~\cite{Boldi_Injecting_2012,Ying2009,Liu_Towards_2008, Thompson_The_2009,Zhou_Preserving_2008,casasprivacy,Ying_Randomizing_2008,Wang2011,Das_Anonymizing_2010,Wu_k_2010,Liu_Privacy_2009,Ninggal_Utility_2015}, and 
+(2)~{\em Utility-oriented} heuristics that suggest avoiding perturbations over {\em ``bridge"} and sensitive edges whose deletion or addition would 
+significantly impact the graph structure~\cite{casasprivacy,Ying_Randomizing_2008,Wang2011,Das_Anonymizing_2010,Wu_k_2010,Liu_Privacy_2009,Ninggal_Utility_2015}.
+It is clear that these two types are complementary to each other and combining them would introduce an added benefit as confirmed by practice in deterministic graph anonymization~\cite{casasprivacy}. Nevertheless, these two types of heuristics and their combination have not been explored yet in the context of uncertain graphs.
+
+In this paper, we first extend the idea of \emph{uniqueness} score as the weighting factor for noise injection. Second, we propose a novel edge relevance that extends well-known graph concepts, such as ``cut edge" for estimating structural errors incurred by edge probability alterations. In order to compute them in \emph{uncertain} graphs, we design an algorithm based sampling. Finally, we utilize these \emph{uncertainty}-embedded metaheuristics to effectively selecting edges for further alteration. 
+
+
+
+
