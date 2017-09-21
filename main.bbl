@@ -1,0 +1,226 @@
+\begin{thebibliography}{10}
+
+\bibitem{Abrahams20132777}
+A.~S. Abrahams, E.~Coupey, E.~X. Zhong, R.~Barkhi, and P.~S. Manasantivongs.
+\newblock Audience targeting by b-to-b advertisement classification: A neural
+  network approach.
+\newblock {\em Expert Systems with Applications}, 40(8):2777 -- 2791, 2013.
+
+\bibitem{Adar_Managing_2007}
+E.~Adar and C.~Re.
+\newblock Managing uncertainty in social networks.
+\newblock {\em {IEEE} Data Eng. Bull.}, 2007.
+
+\bibitem{alsina2015targeting}
+T.~Alsina, D.~Wilson, S.~Joshi, and S.~Sundaresan.
+\newblock Targeting customer segments, Dec.~3 2015.
+\newblock US Patent App. 14/289,118.
+
+\bibitem{Asthana_Predicting_2004}
+S.~Asthana, O.~King, F.~Gibbons, and F.~Roth.
+\newblock Predicting protein complex membership using probabilistic network
+  reliability.
+\newblock {\em Genome research}, 2004.
+
+\bibitem{MOBall}
+M.~O. Ball.
+\newblock Computational complexity of network reliability analysis: An
+  overview.
+\newblock {\em IEEE Transactions on Reliability}, 1986.
+
+\bibitem{Bhagat_Class_2009}
+S.~Bhagat, G.~Cormode, B.~Krishnamurthy, and D.~Srivastava.
+\newblock Class-based graph anonymization for social network data.
+\newblock {\em Proc Vldb Endow}, 2009.
+
+\bibitem{Boldi_Injecting_2012}
+P.~Boldi, F.~Bonchi, A.~Gionis, and T.~Tassa.
+\newblock Injecting uncertainty in graphs for identity obfuscation.
+\newblock {\em SIGMOD}, 2012.
+
+\bibitem{Bollacker_Freebase_2008}
+K.~Bollacker, C.~Evans, P.~Paritosh, and T.~Sturge.
+\newblock Freebase: a collaboratively created graph database for structuring
+  human knowledge.
+\newblock {\em SIMMOD}, 2008.
+
+\bibitem{Bonchi_Identity_2014}
+F.~Bonchi, A.~Gionis, and T.~Tassa.
+\newblock Identity obfuscation in graphs through the information theoretic
+  lens.
+\newblock {\em ICDE}, 2014.
+
+\bibitem{casasprivacy}
+J.~Casas-Roma.
+\newblock Privacy-preserving on graphs using randomization and edge-relevance.
+\newblock {\em Modeling Decisions for Artificial Intelligence}, 2015.
+
+\bibitem{Cho_Friendship_2011}
+E.~Cho, S.~A. Myers, and J.~Leskovec.
+\newblock Friendship and mobility: user movement in location-based social
+  networks.
+\newblock {\em kdd}, 2011.
+
+\bibitem{Colbourn_Colbourn_1987}
+Colbourn and Colbourn.
+\newblock The combinatorics of network reliability.
+\newblock 1987.
+
+\bibitem{Das_Anonymizing_2010}
+S.~Das, O.~Egecioglu, and A.~Abbadi.
+\newblock Anonymizing weighted social network graphs.
+\newblock {\em ICDE}, pages 904--907, 2010.
+
+\bibitem{Wredman:1989:CPC:73007.73040}
+M.~Fredman and M.~Saks.
+\newblock The cell probe complexity of dynamic data structures.
+\newblock {\em STOC}, 1989.
+
+\bibitem{Ghosh_On_2007}
+J.~Ghosh, H.~Ngo, and S.~Yoon.
+\newblock On a routing problem within probabilistic graphs and its application
+  to intermittently connected networks.
+\newblock 2007.
+
+\bibitem{Hartung_Theory_2015}
+S.~Hartung and N.~Talmon.
+\newblock The complexity of degree anonymization by graph contractions.
+\newblock {\em TAMC}, 2015.
+
+\bibitem{hay2010resisting}
+M.~Hay, G.~Miklau, D.~Jensen, D.~Towsley, and C.~Li.
+\newblock Resisting structural re-identification in anonymized social networks.
+\newblock {\em The VLDB Journal}, 2010.
+
+\bibitem{Hay_Anonymizing_2007}
+M.~Hay, G.~Miklau, D.~Jensen, P.~Weis, and S.~Srivastava.
+\newblock Anonymizing social networks.
+\newblock 2007.
+
+\bibitem{Hua_Probabilistic_2010}
+M.~Hua and J.~Pei.
+\newblock Probabilistic path queries in road networks: traffic uncertainty
+  aware path selection.
+\newblock {\em EDBT}, 2010.
+
+\bibitem{Jin_Distance_2011}
+R.~Jin, L.~Liu, B.~Ding, and H.~Wang.
+\newblock Distance-constraint reachability computation in uncertain graphs.
+\newblock {\em VLDB}, 2011.
+
+\bibitem{Kempe_Maximizing_2003}
+D.~Kempe, J.~Kleinberg, and {\'E}.~Tardos.
+\newblock Maximizing the spread of influence through a social network.
+\newblock 2003.
+
+\bibitem{Krogan_Global_2006}
+N.~Krogan, G.~Cagney, H.~Yu, G.~Zhong, and X.~Guo.
+\newblock Global landscape of protein complexes in the yeast saccharomyces
+  cerevisiae.
+\newblock {\em Nature}, 2006.
+
+\bibitem{lee2011}
+J.~Lee and C.~Clifton.
+\newblock {\em How Much Is Enough? Choosing $\epsilon$ for Differential
+  Privacy}.
+\newblock 2011.
+
+\bibitem{Liben_Nowell_Kleinberg_2007}
+D.~Liben~Nowell and J.~Kleinberg.
+\newblock The link prediction problem for social networks.
+\newblock {\em The American Society for Information Science and Technology},
+  2007.
+
+\bibitem{Lin_B2B}
+M.~Lin, M.~Lin, and R.~J. Kauffman.
+\newblock From clickstreams to searchstreams: Search network graph evidence
+  from a b2b e-market.
+\newblock {\em ICEC}, 2012.
+
+\bibitem{Liu_Towards_2008}
+K.~Liu and E.~Terzi.
+\newblock Towards identity anonymization on graphs.
+\newblock {\em SIGMOD}, 2008.
+
+\bibitem{Liu_Privacy_2009}
+L.~Liu, J.~Wang, J.~Liu, and J.~Zhang.
+\newblock Privacy preservation in social networks with sensitive edge weights.
+\newblock {\em SDM}, pages 954--965, 2009.
+
+\bibitem{Mittal_Preserving_2013}
+P.~Mittal, C.~Papamanthou, and D.~Song.
+\newblock Preserving link privacy in social network based systems.
+\newblock {\em NDSS}, 2013.
+
+\bibitem{Nguyen_Anonymizing_2015}
+H.~Nguyen, A.~Imine, and M.~Rusinowitch.
+\newblock Anonymizing social graphs via uncertainty semantics.
+\newblock {\em CCS}, 2015.
+
+\bibitem{Ninggal_Utility_2015}
+M.~Ninggal and J.~H. Abawajy.
+\newblock Utility-aware social network graph anonymization.
+\newblock {\em J Netw Comput Appl}, 2015.
+
+\bibitem{Parchas_Gullo_Papadias_Bonchi_2014}
+Parchas, Gullo, Papadias, and Bonchi.
+\newblock The pursuit of a good possible world: extracting representative
+  instances of uncertain graphs.
+\newblock {\em SIGMOD}, 2014.
+
+\bibitem{Potamias_K_2010}
+M.~Potamias, F.~Bonchi, A.~Gionis, and G.~Kollios.
+\newblock K-nearest neighbors in uncertain graphs.
+\newblock {\em VLDB}, 2010.
+
+\bibitem{Skarkala_Privacy_2012}
+M.~Skarkala, M.~Maragoudakis, S.~Gritzalis, L.~Mitrou, H.~Toivonen, and
+  P.~Moen.
+\newblock Privacy preservation by {k-Anonymization} of weighted social
+  networks.
+\newblock {\em ASONAM}, 2012.
+
+\bibitem{Thompson_The_2009}
+B.~Thompson and D.~Yao.
+\newblock The union-split algorithm and cluster-based anonymization of social
+  networks.
+\newblock 2009.
+
+\bibitem{Wang2011}
+Y.~Wang, L.~Xie, B.~Zheng, and K.~C.~K. Lee.
+\newblock Utility-oriented k-anonymization on social networks.
+\newblock {\em DASFAA}, 2011.
+
+\bibitem{Wu_k_2010}
+W.~Wu, Y.~Xiao, W.~Wang, Z.~He, and Z.~Wang.
+\newblock k-symmetry model for identity anonymization in social networks.
+\newblock {\em EDBT}, 2010.
+
+\bibitem{Ying2009}
+X.~Ying, K.~Pan, X.~Wu, and L.~Guo.
+\newblock Comparisons of randomization and k-degree anonymization schemes for
+  privacy preserving social network publishing.
+\newblock {\em SNA-KDD}, 2009.
+
+\bibitem{Ying_Randomizing_2008}
+X.~Ying and X.~Wu.
+\newblock Randomizing social networks: a spectrum preserving approach.
+\newblock pages 739--750, 2008.
+
+\bibitem{ZhangSensorNetwork}
+L.~Zhang, S.~Chen, Y.~Jian, Y.~Fang, and Z.~Mo.
+\newblock Maximizing lifetime vector in wireless sensor networks.
+\newblock {\em IEEE/ACM Trans. Netw.}, 2013.
+
+\bibitem{Zhao_Detecting_2014}
+B.~Zhao, J.~Wang, M.~Li, F.~Wu, and Y.~Pan.
+\newblock Detecting protein complexes based on uncertain graph model.
+\newblock {\em IEEE/ACM Transactions on Computational Biology and
+  Bioinformatics.}, 2014.
+
+\bibitem{Zhou_Preserving_2008}
+B.~Zhou and J.~Pei.
+\newblock Preserving privacy in social networks against neighborhood attacks.
+\newblock {\em ICDE}, 2008.
+
+\end{thebibliography}

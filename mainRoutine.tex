@@ -1,0 +1,23 @@
+\begin{algorithm}
+% {\scriptsize
+	\begin{algorithmic}[1]
+    	\item[] {\textbf{Input:}~Uncertain graph $\mathcal{G}$, adversary knowledge $\mathcal{K}$, obfuscation level $k$, tolerance level $\epsilon$, size multiplier $c$ and white noise level $q$ }
+        \item[] {\textbf{Output:}~The anonymized result $\tilde{\mathcal{G}}_{obf}$}
+     	\STATE {$\sigma_{l} \leftarrow 0$; $\sigma_{u} \leftarrow 1$} \\
+        \REPEAT
+        \STATE{$\langle \tilde{\epsilon}, \tilde{\mathcal{G}} \rangle$ $\leftarrow$ \texttt{GenObf}($\mathcal{G},k,\epsilon,c,q,\sigma_{u}, \mathcal{K}$)} \\
+        \STATE{{\bf if} $\tilde{\epsilon}=1$ (fail) {\bf then} $\sigma_{l} \leftarrow \sigma_{u}$; $\sigma_{u} \leftarrow 2\sigma_{u}$}
+        \UNTIL{$\tilde{\epsilon} \neq 1 $} \\
+        \REPEAT
+        	\STATE {$\sigma \leftarrow (\sigma_{u}+\sigma_{l})/2$}
+            \STATE {$\langle \tilde{\epsilon}, \tilde{\mathcal{G}} \rangle \leftarrow \texttt{GenObf}(\mathcal{G},k,\epsilon,c,q,\sigma_{u}, \mathcal{K})$}
+            \STATE {{\bf if} $\tilde{\epsilon} =1$~{\bf then}~$\sigma_{l} \leftarrow \sigma$}
+            \STATE {{\bf else} $\sigma_{u} \leftarrow \sigma;~~\tilde{\mathcal{G}}_{obf} \leftarrow \tilde{\mathcal{G}}$}
+        \UNTIL{$\sigma_{u}-\sigma_{l}$ is enough small}
+        % \COMMENT{\textcolor{blue}{\scriptsize Binary search for better obfuscation}}
+        \STATE {return $\tilde{\mathcal{G}}_{obf}$}
+    	\caption{\SysName Iterative Skeleton}
+	 \label{alg:Skeleton}
+    \end{algorithmic}
+    % }
+\end{algorithm}
