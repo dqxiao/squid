@@ -7,7 +7,7 @@ In this section, we present the notations, definitions and the problem formulati
 
 \subsection{Uncertain Graph}
 % Let $\mathcal{G}=(V,E,\mathit{p})$ be an uncertain graph, where $V$ is the set of nodes, $E$ is the set of edges, and function $\mathit{p}: E \rightarrow [0,1]$ assigns a  probability of existence to each edge, denoted as $\mathit{p}(e)$. 
-An uncertain graph $\mathcal{G}=(V,E,\mathit{p})$, is defined over a set of nodes $V$, a set of edges $E$, and a set of probabilities $\mathit{p}$ of edge existence. Following the literature, we consider the edge probabilities independent~\cite{Potamias_K_2010,Zhao_Detecting_2014,Hua_Probabilistic_2010,Jin_Distance_2011}, and we assume \emph{possible-worlds} semantics~\cite{Colbourn_Colbourn_1987}. Specifically, the \emph{possible world} semantics interprets $\mathcal{G}$ as a set of possible deterministic graphs 
+An uncertain graph $\mathcal{G}=(V,E,\mathit{p})$, is defined over a set of nodes $V$, a set of edges $E$, and a set of probabilities $\mathit{p}$ of edge existence. Following the literature, we consider the edge probabilities independent~\cite{Potamias_K_2010,Zhao_Detecting_2014,Jin_Distance_2011}, and we assume \emph{possible-worlds} semantics~\cite{Colbourn_Colbourn_1987}. Specifically, the \emph{possible world} semantics interprets $\mathcal{G}$ as a set of possible deterministic graphs 
 $W(\mathcal{G}) = \{G_1, G_2, ..., G_n\}$, where each deterministic graph $G_i \in W(\mathcal{G})$ includes all vertices of $\mathcal{G}$ 
 and a subset of edges $E_{G_i} \subset E$.  
 The probability of observing any possible world $G_i=(V,E_{G_i}) \in W(\mathcal{G})$ is    
@@ -20,7 +20,7 @@ In this work, we assume the input uncertain graph undirected and contains no sel
 
 \subsection{Reliability-Based Utility Loss Metric}
 A well-chosen utility-loss metric may lead to substantially less sanitized graphs at a minimal loss of information. 
-As be known to all, connectivity is a fundamental graph property and plays an important role in graph mining tasks such as locating $k-$nearest neighbor~\cite{Potamias_K_2010}, graph clustering~\cite{Asthana_Predicting_2004} and shortest paths detecting~\cite{Zhao_Detecting_2014}. The connectivity model has been shown to be able to yield better representation than degree sequence model. The connectivity discrepancy was proven to be a proper utility-loss metric. In this paper, we use its generalized version -- Reliability Discrepancy as the utility-loss metric in the uncertain graph context. 
+As be known to all, connectivity is a fundamental graph property and plays an important role in graph mining tasks such as locating $k-$nearest neighbor~\cite{Potamias_K_2010}, graph clustering~\cite{Asthana_Predicting_2004} and shortest paths detecting~\cite{Zhao_Detecting_2014}. Moreover, the connectivity model has been shown to be able to yield better representation than degree sequence model. The connectivity discrepancy was proven to be a proper utility-loss metric. Therefore, we use its generalized version -- Reliability Discrepancy as the utility-loss metric in the uncertain graph context. 
  
 In uncertain graphs, the concept of reliability is used to generalize \emph{connectivity} by  capturing the probability that two given (sets of) nodes are reachable over all possible worlds of the uncertain graph as follows:
 \begin{definition}

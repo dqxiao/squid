@@ -3,28 +3,32 @@ The results in the previous section demonstrate the huge utility loss in the per
 
 \subsection{The Chameleon framework}
 \input{mainRoutine.tex}
-We now introduce the state-of-art perturbation algorithm~\cite{Boldi_Injecting_2012} that computes the noise needed to injected into the input \emph{determinitic} graph to obtain the desired privacy level. Each selected edge is altered based on a stochastic variable drawn from a trunated Normal distribution, $R(\sigma)$. This distribution has density function proportional to the Normal distribution, with mean $0$ and variance $\sigma^2$. Thus, small values of $\sigma$ contribute towards better utility, but at the same time they provide lower level of obfuscation. Targeting for high utility, the algorithm aims at injecting the minmal amount of noise need to achieve the required obfuscation. Its computation is achieved via a binary search on the value of the noise uncertainty parameter $\sigma$, as shown in Algorithm~\ref{}. 
+We now introduce the state-of-art perturbation algorithm~\cite{Boldi_Injecting_2012} that computes the noise needed to injected into the input \emph{determinitic} graph to obtain the desired privacy level. Each selected edge is altered based on a stochastic variable drawn from a trunated Normal distribution, $R(\sigma)$. This distribution has density function proportional to the Normal distribution, with mean $0$ and variance $\sigma^2$. Thus, small values of $\sigma$ contribute towards better utility, but at the same time they provide lower level of obfuscation. Targeting for high utility, the algorithm aims at injecting the minmal amount of noise need to achieve the required obfuscation. Its computation is achieved via a binary search on the value of the noise parameter $\sigma$, as shown in Algorithm~\ref{}. 
 % change a litte 
 
-The core function of this process is the \texttt{GenObf} function which performs following core steps:
+The binary search flow is determined by the \texttt{GenObf} function. 
+The function \texttt{GenObf} aims at finding a {\keobf} using a given noise parameter $\sigma$.
+It returns a pair $\langle \tilde{\epsilon}, \tilde{\mathcal{G}} \rangle$, where $\tilde{\epsilon} =1$ or $\tilde{\epsilon} \le \epsilon$. In the first case, all the attempts fail. In the latter cases, $\tilde{\mathcal{G}}$ is a {\keobf}. 
+The function \texttt{GenObf} find obfuscation candidate in a randomized way, $t$ attempts are performed. Each attempt performs following core steps:
 \begin{itemize}
     \item{Select a subset of edges subjects to further alteration;}
     \item{Alter selected edges as the computed amount of noise;}
+    \item{Check the solution with/out enough privacy guarantee;}
 \end{itemize}
 
-\textbf{Contribution}~~The conventional schemes are plausible if the operating edge probability is binary, which is unreasonable when dealing with uncertain graphs. Our goal is to develop a privacy mechanism that reduced the amount of noise that must be added to achieve a given privacy level for \emph{uncertain} graphs. Our insight is to shift an existing framework for anonymizing \emph{probabilistic} graphs by integrating uncertainty semantics into two core steps. 
+\textbf{Contribution.}~~The conventional schemes are plausible if the operating edge probability is binary, which is unreasonable when dealing with uncertain graphs. Our goal is to develop a anonymization mechanism that reduced the amount of noise that must be added to achieve a given privacy level for \emph{uncertain} graphs. Our insight is to shift an existing framework by integrating uncertainty semantics into core steps such as edge selection \& alteration.
 
 \subsection{Uncertainty-aware Edge Selection}
 Figuring out the optimal subset of edges that balances the privacy gain and the utility loss is a typical combinational optimization problem. It involves the consideration over the exponential number of edge combinations. Let alone the infinite possibilities of probability values on the selected edges, which further complicates the problem.
 
 To alleviate combinational intractability, the heuristics that have been proposed so far for anonymizing deterministic graphs can be classified into two main categories: 
 (1)~{\em Anonymity-oriented} heuristics that suggest injecting larger perturbations to the edges associated with the less-anonymized (more-unique) 
-nodes~\cite{Boldi_Injecting_2012,Ying2009,Liu_Towards_2008, Thompson_The_2009,Zhou_Preserving_2008,casasprivacy,Ying_Randomizing_2008,Wang2011,Das_Anonymizing_2010,Wu_k_2010,Liu_Privacy_2009,Ninggal_Utility_2015}, and 
+nodes~\cite{Boldi_Injecting_2012,Liu_Towards_2008, Thompson_The_2009,Zhou_Preserving_2008}, and 
 (2)~{\em Utility-oriented} heuristics that suggest avoiding perturbations over {\em ``bridge"} and sensitive edges whose deletion or addition would 
-significantly impact the graph structure~\cite{casasprivacy,Ying_Randomizing_2008,Wang2011,Das_Anonymizing_2010,Wu_k_2010,Liu_Privacy_2009,Ninggal_Utility_2015}.
+significantly impact the graph structure~\cite{casasprivacy,Ying_Randomizing_2008,Liu_Privacy_2009,Ninggal_Utility_2015}.
 Note that these two types are complementary to each other and combining them would introduce an added benefit as confirmed by practice in deterministic graph anonymization~\cite{casasprivacy}. Nevertheless, these two types of heuristics and their combination have not been explored yet in the context of \emph{uncertain} graphs.
 
-In this paper, we first extend the idea of \emph{uniqueness} score via density estimation. Second, we propose a novel edge relevance that extends well-known graph concepts, such as ``cut edge" for estimating structural errors incurred by edge probability alterations. In order to compute edge relevance in \emph{uncertain} graphs, we design an algorithm based sampling. Finally, we utilize these \emph{uncertainty}-embedded metaheuristics to effectively selecting edges for further alteration. 
+In this paper, we first extend the idea of \emph{uniqueness} score via density estimation. Second, we propose a novel edge relevance that extends well-known graph concepts, such as ``cut edge" for estimating structural errors incurred by edge probability alterations. In order to compute edge relevance in \emph{uncertain} graphs, we design an algorithm based sampling. Finally, we utilize these \emph{uncertainty}-embedded meta-heuristics to effectively selecting edges for further alteration. 
 
 \subsection{Uniqueness Score}
 Intutively, larger amount of noise should be added at nodes that are less anonymized (i.e, more distinctive) in the original graphs. \emph{Uniqueness score} is shown to be an effective metric of how typical is the node $v$ among the nodes of the graph~\cite{Boldi_Injecting_2012}. The formal defintion of uniqueness score is given as follows. 
@@ -41,10 +45,6 @@ $\theta$ which implies the spread out of the property value over the domain. In 
 Here, we set $\theta$ equals $\sigma_{\mathcal{G}}$ as the latter represents the spread of property value in the \emph{uncertain graph}. For a given node with the property $\omega$, we can compute its ``uniqueness" score as the reverse of its density. The higher the uniqueness score the less-protected the node and the more anonymization it eventually needs.
 
 \input{relevance.tex}
-
-% \subsection{Reliability Relevance}
-
-% \textbf{\emph{Observation}} As exemplified in Figure~\ref{fig:edgeRR}, each edge modification will have \emph{varying} impact to the graph structure in the context of uncertain graphs. From the perspective of \emph{uniqueness}, nodes $a$ and $e$ are identical since adjacent edges have identical uncertainties. Accordingly, anonymity-oriented heuristics would select and perturb edges $(a,b)$ and $(b,e)$ without bias. While, the deletion of the uncertain edge $(b,e)$, the only link between two \emph{reliable} clusters, clearly incurs much larger structure distortion than the deletion of the edge $(a,b)$. This observation calls for an effective measure of edge influence in the context of uncertain graphs. 
-
-% In this work, we provide a compact analytic form of reliability deviation caused by individual uncertain edge modification in a fine-grained way, namely edge probability alteration in any granularity. Following this path, we introduce the concept of edge reliability relevance, which equals the sum expectation of reliability discrepancy of all the node pairs. Besides, we provide an algorithm for computing edge \emph{reliability relevance} (RR) efficiently. 
+\input{relevanceEvaluation.tex}
+\input{genObf.tex}
 

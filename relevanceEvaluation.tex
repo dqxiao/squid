@@ -1,4 +1,4 @@
-\textbf{Reliability Relevance Evaluation}
+\textbf{Reliability Relevance Evaluation.}~~
 Given this theoretical foundation, the challenge is how to evaluate the reliability relevance of edges in  a given uncertain graph efficiently ($\mathcal{E}RR-$eval). 
 For each edge $e$, we need to measure the reliability difference over $\mathcal{G}_{e}$ and $\mathcal{G}_{\bar{e}}$. 
 This evaluation involves the two-terminal reliability detection problem, which is known to be NP-complete~\cite{MOBall}.   
@@ -10,11 +10,13 @@ worlds of the input uncertain graph, where $N$ is large enough (around $1,000$) 
 Over each sampled possible world (Say $G$), we carry out a connected-component computation algorithm to count 
 the number of connected pairs $cc(G)$. Then, the count on the original uncertain graph $cc(\mathcal{G})$ can be estimated by taking the average over the sampled deterministic graphs. 
 
-\begin{theorem}
+\begin{lemma}
 	The complexity of the baseline $\mathcal{E}RR-$eval algorithm is $\mathcal{O} (|E| \cdot  N \alpha(|V|) |E| )$ where $\alpha$ is the inverse Ackermann function.  
-\end{theorem}
+\end{lemma}
 
-{\bf Proof sketch} The time complexity of the connected component detection algorithm based on the union-find method is $\mathcal{O}(\alpha(|V|) |E|)$~\cite{Wredman:1989:CPC:73007.73040}. Consequently, computing the $\mathcal{E}RR$ for an edge over the $N$ possible worlds takes time $\mathcal{O}(N \alpha(|V|) |E|)$, and the total time complexity for all the edges is $\mathcal{O} (|E| \cdot  N \alpha(|V|) |E|)$. 
+
+
+\textsc{Proof.}~~The time complexity of the connected component detection algorithm based on the union-find method is $\mathcal{O}(\alpha(|V|) |E|)$~\cite{Wredman:1989:CPC:73007.73040}. Consequently, computing the $\mathcal{E}RR$ for an edge over the $N$ possible worlds takes time $\mathcal{O}(N \alpha(|V|) |E|)$, and the total time complexity for all the edges is $\mathcal{O} (|E| \cdot  N \alpha(|V|) |E|)$.}
 
 
 \begin{figure}
@@ -25,11 +27,12 @@ the number of connected pairs $cc(G)$. Then, the count on the original uncertain
     \label{fig:rrEval}
 %     \vspace{-1em}
 \end{figure}
+\begin{lemma}
+    The time complexity of Algorithm\ref{alg:RReval} $\mathcal{E}RR-$val is $\mathcal{O}(N \alpha(|V|) |E|)$ where $N$ is the number of samples.
+\end{lemma}
 Obviously, the baseline algorithm is inefficient when the input uncertain graph is very large (it is quadratic in the number of edges). Here, we present a efficient algorithm for $\mathcal{E}RR$ evaluation in Algorithm~\ref{alg:RReval}. Its basic idea is to re-use the connected components detection result of samples as illustrated in~\ref{fig:rrEval}. For each edge $e$, we group the sampled possible worlds according to the edge existence (Line 4-6), then get the sampled average of $cc$ for each group as accurate approximation of $cc(\mathcal{G}_{e})$ and $cc(\mathcal{G}_{\bar{e}})$. By this way, we bring the the evaluation of edge reliability relevance to the realm.  
 
-\begin{theorem}
-	The time complexity of Algorithm\ref{alg:RReval} $\mathcal{E}RR-$val is $\mathcal{O}(N \alpha(|V|) |E|)$ where $N$ is the number of samples.
-\end{theorem}
+
 
 
 

@@ -1,33 +1,15 @@
 \subsection{Reliability Relevance}
 
 \textbf{\emph{Observation}}~~ 
-When an uncertain edge is altered (partial added or deleted), it will result in the change of reliability. 
+% When an uncertain edge is altered (partial added or deleted), it will result in the change of reliability. 
+Clearly, alteration over an single uncertin edge (partial added or deleted) can produce structural changes that send ripples through the rest of the graph. 
 The same amount of alteration performed over different edges may incur significantly different structure change. 
 Referring to the example in Figure~\ref{fig:edgeRRGraph}, two vertices $\tt{a}$ and $\tt{e}$ will be assigned the same {\em uniqueness score} due to the exact probabilities associated with their edges. 
-As a result, the {\em anonymity-oriented} strategy would select and perturb either of the two edges $(\tt{a},\tt{c})$ and $(\tt{c},\tt{e})$ with the same probability. 
-However, the modifications to $(\tt{c},\tt{e})$---which is the only link between two~\emph{reliable} clusters---clearly incurs much larger structure distortion than that on $(\tt{a},\tt{c})$. 
-Therefore, edge perturbation needs to consider the structural impact of \emph{uncertain} graph edge alteration.
-
+As a result, the {\em anonymity-oriented} strategy would select and perturb either of the two edges $(\tt{a},\tt{c})$ and $(\tt{c},\tt{e})$ with the same probability. However, the modifications to $(\tt{c},\tt{e})$---which is the only link between two~\emph{reliable} clusters---clearly incurs much larger structure distortion than that on $(\tt{a},\tt{c})$.To control the utility loss, it is cruical to quantify the structural impact of a single edge unit alteration. 
 
 
 To this end, we propose a theoretically sound estimation for the {\em ``reliability deviation''} caused by individual uncertain edge modifications in a fine-grained way. 
-Following this path, we introduce a new measure, called {\em Edge Reliability Relevance $(\mathcal{E}RR)$}, at the edge level, and an aggregated measure, called {\em Vertex Reliability Relevance $(\mathcal{V}RR)$}, at the vertex level as will be formally defined next. These measures will enable ranking the edges to be targeted for obfuscation in a meaningful utility-based perspective. Besides, we provide an algorithm for computing them efficiently. 
-
-
-\begin{definition}
-    \textbf{Two-terminal Reliability Relevance}
-    Given an uncertain graph $\mathcal{G}$, and two nodes $u$ and $v$, 
-    the  reliability $R_{u,v}(\mathcal{G})$ as defined in Def.~\ref{d:reliability} is considered as a multivariate function involving all the edge probabilities in $\mathcal{G}$.   
-    Thus, given an uncertain edge $e \in \mathcal{G}$, the partial derivative of $R_{u,v}(\mathcal{G})$ w.r.t $e$'s probability 
-    variable $p(e)$, denoted as $\mathcal{E}RR^{e}_{u,v}(\mathcal{G})$, represents the sensitivity of the 
-    two-terminal reliability $R_{u,v}$ w.r.t $p(e)$ while all others are held constant. 
-     It is defined as:  
-\begin{equation*}
-	\vspace{-0.5em}
-    \mathcal{E}RR^{e}_{u,v}(\mathcal{G}) = \frac{\partial R_{u,v}(\mathcal{G})}{\partial \mathit{p}(e)}
-    \vspace{-0.5em}
-\end{equation*}
-\end{definition}
+Following this path, we introduce a new measure, called {\em Edge Reliability Relevance $(\mathcal{E}RR)$}, at the edge level, and an aggregated measure, called {\em Vertex Reliability Relevance} $(\mathcal{V}RR)$, at the vertex level as will be formally defined next. These measures will enable ranking the edges to be targeted for obfuscation in a meaningful utility-based perspective. Besides, we provide an algorithm for computing them efficiently. 
 
 
 \begin{figure}
@@ -52,49 +34,47 @@ Following this path, we introduce a new measure, called {\em Edge Reliability Re
 \end{figure}
 
 
+\textbf{Edge Relevance Analysis.}~~In the context of uncertain graphs, the reliability relevance of edge is defined as reliability discrepancy when one single edge is alterred. Changing a single edge in $\mathcal{G}$ will result in one or more point-wise reliability changing in the corresponding \emph{uncertain} graphs. Thus, the edge reliability relevance is computed as the sum of reliability deviation caused by a single edge alteration. 
+
+\begin{definition} 
+  \textbf{Single Edge Reliability Relevance.}~~Given an uncertain graph, the sensitivity of two-terminal reliability $R_{u,v}$ over edge $e$ is defined as follows:
+  \begin{align*}
+    \mathcal{E}RR^{e}_{u,v} = \lim_{h \rightarrow 0 } \frac{R_{u,v}(\mathcal{G'})-R_{u,v}(\mathcal{G})}{h}
+  \end{align*}
+  where $\mathcal{G'}$ are identical to the original graph expect the edge $e$ with modified probability $p(e)+h$.
+\end{definition}
+
+
 \begin{lemma}
-    \textbf{Factorization Lemma}
-       Given an uncertain graph $\mathcal{G}$, the reliability of the node pair $(u,v)$, i.e., $R_{u,v}(\mathcal{G})$, can be factorized via a specific uncertain edge $e$ as follows:
-    \begin{equation*}
-        R_{u,v}(\mathcal{G}) = p(e) R_{u,v} (\mathcal{G}_{e}) + (1-p(e)) R_{u,v} (\mathcal{G}_{\bar{e}} ) 
-        \label{eq:fac}
-    \end{equation*}
+    \textbf{Factorization Lemma}~~Given an uncertain graph $\mathcal{G}$, the reliability of the node pair $(u,v)$, i.e., $R_{u,v}(\mathcal{G})$, can be factorized via a specific uncertain edge $e$ as follows:
+    % \begin{equation*}
+    \begin{align*}
+      R_{u,v}(\mathcal{G}) &= p(e) R_{u,v} (\mathcal{G}_{e}) + (1-p(e)) R_{u,v} (\mathcal{G}_{\bar{e}}) \\
+                          & = p(e) \big[ R_{u,v} (\mathcal{G}_{e}) - R_{u,v} (\mathcal{G}_{\bar{e}}) \big] + R_{u,v} (\mathcal{G}_{\bar{e}})
+    \end{align*}
     where uncertain graphs $\mathcal{G}_{e}$ and  $\mathcal{G}_{\bar{e}}$ are identical to the original graph $\mathcal{G}$ with the 
-    exception that $e$ is certainly present in the former and certainly not present in the later. 
+    exception that $e$ is certainly present in the former and certainly not present in the later.
+    \label{lemma:fac} 
 \end{lemma}
 
+Lemma~\ref{lemma:fac} indicates that the \emph{deviation} of $R_{u,v}$ introduced by a specific edge $e$ is \emph{linear} to the amount of edge probability deviation as shown in Figure~\ref{fig:edgeRR}. In other words, the edge reliability relevance $\mathcal{E}RR^{e}_{u,v}$ equals to the difference of $R_{u,v}$ in the corresponding neighbor \emph{uncertain graphs} $\mathcal{G}_{e}$ and $\mathcal{G}_{\bar{e}}$. First, we remind the reader that edge reliability relevance always be positive since all the connected pairs in $\mathcal{G}_{e}$ are guaranteed to be a superset or at least equal to that in $\mathcal{G}_{\bar{e}}$.
 
-According to the factorization lemma, the partial derivative $\mathcal{E}RR^{e}_{u,v}$ can be rewritten as: 
-\begin{equation*}
-    \mathcal{E}RR^{e}_{u,v}(\mathcal{G}) = R_{u,v}(\mathcal{G}_{e})-R_{u,v}(\mathcal{G}_{\bar{e}})
-\end{equation*}
 
-On one hand, this factorization indicates that for a given edge $e$,  the incurred reliability discrepancy is {\bf linear} to the amount of edge probability difference. 
-On the other hand, it indicates that edges with different topological locations have different reliability sensitivity. 
-The other crucial point to highlight is that $R_{u,v}(\mathcal{G}_{e}) - R_{u,v} (\mathcal{G}_{\bar{e}}) \ge 0$ is always true since 
-all connected pairs in $\mathcal{G}_{e}$ are guaranteed to be a superset or at least equal to that in $\mathcal{G}_{\bar{e}}$.
-
-Considering a single uncertain edge $e$, the derivatives $\mathcal{E}RR^e_{u,v}(\mathcal{G})$ over all 
-vertex pairs in $\mathcal{G}$ can be arranged in a $|V|\times |V|$ matrix, and as highlighted above, 
-all entires of this matrix equal to or greater than zero.  
-By aggregating these derivatives, we can estimate the overall {\em reliability relevance} of edge $e$, denoted as
-$\mathcal{E}RR^{e}(\mathcal{G})$, as the sum of all the $\mathcal{E}RR^{e}_{u,v}$ values. That is:
-%In this work, we define $RR(e)$ to be reliability relevance of an edge $e$ which can be quantified by the sum of all the $RR_{u,v}(e)$, as  
+By aggregating edge relevance among all the node pairs $u,v$, we can get the overall {\em reliability relevance} of edge $e$ $\mathcal{E}RR^{e}(\mathcal{G})$ defined as 
 \begin{align*}
+    \vspace{-1em}
     \mathcal{E}RR^e(\mathcal{G}) &= \sum_{u,v} |\mathcal{E}RR^e_{u,v}(\mathcal{G})| \\
-          &= \sum_{u,v} |R_{u,v}(\mathcal{G}_{e}) -R_{u,v}(\mathcal{G}_{\bar{e}})| \\  
-         &= \sum_{u,v} R_{u,v} (\mathcal{G}_{e}) - \sum_{u,v} R_{u,v}(\mathcal{G}_{\bar{e}}) 
+                                 &= \sum_{u,v} |R_{u,v}(\mathcal{G}_{e}) -R_{u,v}(\mathcal{G}_{\bar{e}})| \\  
+                                 &= \sum_{u,v} R_{u,v} (\mathcal{G}_{e}) - \sum_{u,v} R_{u,v}(\mathcal{G}_{\bar{e}}) 
 \end{align*}
+% \vspace{-0.5em}
+Note that $\mathcal{E}RR^e$ equals to the difference of the expected number of connected pairs between two uncertain graphs $\mathcal{G}_{e}$ and $\mathcal{G}_{\bar{e}}$.  
+In the context of edge relevance, reliability relevance can be seen as generalization of cut-edges, which quantifies the impact of partial edge deletion or addition on the connectivity in the uncertain graph. 
+When the perturbation hits those edges with higher reliability relevance, it would produce bigger structural distortion over the overall \emph{uncertain} graph. 
 
-Note that $\mathcal{E}RR^e$ equals to the difference of the expected number of 
-connected pairs between the two uncertain graphs $\mathcal{G}_{e}$ and $\mathcal{G}_{\bar{e}}$
- by explicit incorporation of edge uncertainty.  
- In the context of edge relevance, reliability relevance can be seen as generalization of cut-edges, 
- which quantifies the impact of partial edge deletion or addition on the connectivity in the uncertain graph. 
-The higher reliability relevance score of an edge, the bigger impact of edge perturbation over the overall graph.  
 
 On the basis of these edge-level reliablity relevance, we can now compute a vertex-level reliability relevance of a given vertex (Say $u$) as a weighted sum of reliability relevance of $u$'s edges $\mathtt{E}^{u}$.  
-% Fix $u \in \mathcal{G}$ and let $\mathtt{E}^{u}$ be the pairs of vertices that include $v$, we have 
+Fix $u \in \mathcal{G}$ and let $\mathtt{E}^{u}$ be the pairs of vertices that include $v$, we have 
 \begin{equation*}
     \vspace{-0.5em}
     \mathcal{V}RR^{u}(\mathcal{G})=\sum_{e \in \mathtt{E}^{u}} p(e)  \mathcal{E}RR^{e}(\mathcal{G})
@@ -103,4 +83,3 @@ On the basis of these edge-level reliablity relevance, we can now compute a vert
 
 The $\mathcal{V}RR^{u}(\mathcal{G})$  is a measure of the expected impact of vertex modification on the graph reliability. Namely, the higher the vertex's reliability relevance, the larger reliability distortion introduced by modification associated with its edges.
 
-\input{relevanceEvaluation.tex}

@@ -8,16 +8,6 @@ Motivated by the preceding, in this work we introduce the representative anonymi
 However, this approach has several limitations. First, the input edge uncertainties (probabilities) are no longer integrated into the anonymization process since they are detached from the graph in the first step. Second, the anonymization process (the second step) is oblivious to the {\em reliability} metric since its input is a made-up deterministic graph. Third, since the two phases are isolated from each other, different phases are optimized for different metrics. As the result, this naive \texttt{Rep-An} approach introduces a high level of noise and consequently deteriorates the overall utility of the anonymized graph. 
 In the experiment section, we further study this approach empirically and confirm its impracticality.
 
-% Figure~\ref{fig:repOB} illustrates these limitations. The uncertain input graph (L.H.S) will have 
-% the corresponding deterministic representative graph (middle) according to~\cite{Parchas_Gullo_Papadias_Bonchi_2014}. 
-% This graph is viewed by the state-of-art anonymization techniques as being already anonymized and will be published as is (R.H.S top graph).
-% However, it is clear that an anonymized graph with a much-higher utility can be generated, e.g., (R.H.S bottom graph).  
-
-% % {\todo{Still References in the figure need to be fixed...}}
-% % the utility loss between XXX and XXX is wrong expression 
-% % {\todo{Remove the 2nd half of that Figure 3. I does not add much... And it needs more discussion on why the top part generates edges of weight 1, which does not seem to be uncertain, etc...}} 
-% % {\todoB{References in the figure (on the edges) do not match the ones in text!!! Update to make them matching...}}
-
 \begin{figure}[t]
 	\vspace{-1em}
     \captionsetup{margin=0cm}
@@ -31,7 +21,7 @@ In the experiment section, we further study this approach empirically and confir
 \subsection{Validation on Real Uncertain Graphs}
 In this section, we empirically evaluate the impact of noise injected to extracted \emph{representative} instances by executing Rep-An on real uncertain graphs.
 
-\textbf{Methodology.}~We use three uncertain graphs that capture different real-world scenarios and have been used in prior uncertain graph mining studies. Table~\ref{tab:dataset} lists uncertain graphs and their tolerance parameters used in our evaluation.
+\textbf{Uncertain Graphs.}~~We use three uncertain graphs that capture different real-world scenarios and have been used in prior uncertain graph mining studies. Table~\ref{tab:dataset} lists uncertain graphs and their tolerance parameters used in our evaluation.
 
 \textsc{DBLP} is a co-authorship network where the probability of an edge between two authors represents the likelihood two authors will collaborate in the future. The probability is obtained by a predictive model based on historical co-authorship data.~\cite{Jin_Distance_2011}. 
 
@@ -56,10 +46,35 @@ The probability is obtained through biological experiments.
         \label{tab:dataset}
 \end{table}
 
-% pass 
-We extract the single representative instances for each uncertain graph, introduce noise using the state-of-art graph anonymization strategy, and then compute the Reliability Discrepancy between the perturbed graph and the original uncertain graph as a measure of the level of graph structural error introduced. We approximate its expectation value by the average value obtained over the sampled possible worlds. Here, we use 1,000 samples since it has been shown that $1000$ usually suffices to achieve accuracy converge~\cite{Potamias_K_2010}.
+\begin{figure}[!htb]
+  \subfigure[\small Edge Probability Distribution]{\label{subfig:edgepro}  
+    \begin{minipage}[l]{1\columnwidth}
+      \centering
+       \includegraphics[width=\linewidth]{exp/edge_prob_row.eps}
+    \end{minipage}
+    \vspace{-15pt}
+  }
+  \subfigure[\small Expected Degree Distribution]{\label{subfig:degreepro}  
+    \begin{minipage}[l]{1\columnwidth}
+      \centering
+       \includegraphics[width=\linewidth]{exp/degree_row.eps}
+    \end{minipage}
+  }
+    \vspace{-10pt}
+    \caption{Edge probability\& degree distributions.}
+    \label{fig:summary_graph}
+   \vspace{-15pt}
+\end{figure}
 
-\textbf{Results}. Figure~\ref{} shows that the Rep-An algorithm produces a large error for large values of $k$ (i.e. strong privacy guarntees). As we mentioned, the low level of utility is due to the large noise Rep-An injects into the representative instance, resulting in a perturbed graph (uncertain one) which is significantly different from the original \emph{uncertain} graph. 
+Figure~\ref{subfig:edgepro} shows the edge-probability distribution in the three datasets. 
+Note that the DBLP dataset only has  a few probability values, while Brightkite dataset's probability values are generally very small.The PPI dataset has a more uniform probability distribution. 
+We also present their degree distributions of ``unique'' nodes (with high degree and obfuscation level is smaller than $300$). Observe that, all the three graphs have a heavy-tailed degree distribution (i.e, an amount of ``unique" nodes). In the context of graph privacy, the larger amount of ``unique'' nodes requires a larger amount of noise.
+
+
+% pass 
+\textbf{Computation.}~~We extract the single representative instances for each uncertain graph, introduce noise using the state-of-art graph anonymization strategy, and then compute the Reliability Discrepancy between the perturbed graph and the original uncertain graph as a measure of the level of graph structural error introduced. We approximate its expectation value by the average value obtained over the sampled possible worlds. Here, we use 1,000 samples since it has been shown that $1000$ usually suffices to achieve accuracy converge~\cite{Potamias_K_2010}.
+
+\textbf{Results.}~~Figure~\ref{} shows that the Rep-An algorithm produces a large error for large values of $k$ (i.e. strong privacy guarntees). As we mentioned, the low level of utility is due to the large noise Rep-An injects into the representative instance, resulting in a perturbed graph (uncertain one) which is significantly different from the original \emph{uncertain} graph. 
 
 The high discrepancy is largely due to the representative extraction step. In the extreme case where $k=1$ (i.e. no privacy guarntees), the sole representative extraction step produces high reliability errors. 
 To better understand its limitation, we report the potential lower-bound on the error that could be achieved via Chamelon methods in Figure~\ref{}. Indeed, Figure~\ref{} shows that the utility loss of the Rep-An strategy can largely be attributed to the overlook of edge uncertainty.   

@@ -1,0 +1,51 @@
+\begin{algorithm}[!htb]
+% {\scriptsize
+	\begin{algorithmic}[1]
+    	\item[] {\textbf{Input:}~Uncertain graph $\mathcal{G}=(V,E,\mathit{p})$, $\mathcal{K},k,\epsilon,c,q$, \\and standard deviation $\sigma$ }
+        \item[] {\textbf{Output:}~A pair $\langle \tilde{\epsilon}, \tilde{\mathcal{G}} \rangle$} where $\tilde{\mathcal{G}}$ is a $(k,\epsilon)-$obfuscation, or $\tilde{\epsilon}=1$ if fail to find a $\keobf$. 
+        \STATE  {\textbf{compute} the uniqueness $U^{v}$ for $v \in V$}
+        \STATE  {\textbf{compute} the reliability relevance $\mathcal{V}RR^{v}$ for $v \in V$}
+        \STATE  {$Q^{v} \leftarrow U^{v} \cdot \mathcal{V}RR^{v}$ for $v \in V$}
+        \STATE  {$H \leftarrow$  the set of $\lceil \frac{\epsilon}{2} |V| \rceil$ with largest $Q^{v}$}
+     	\STATE  {Normalized $\mathcal{V}RR^{v}$ for $v \in V \setminus H$}
+        \STATE  {$Q^{v} \leftarrow U^{v} \cdot 1-\mathcal{V}RR^{v}$ for $v \in V \setminus H$}
+        \STATE {$\tilde{\epsilon} \leftarrow 1$}
+   		\FOR{$t$ times} 
+%         	\COMMENT{\textcolor{blue} {\scriptsize $\nabla$~~Find an initial successful obfuscation}}
+         	\REPEAT  
+                \STATE {$E_{C} \leftarrow E$} 
+            	\STATE{randomly pick a vertex $u \in V \setminus H$ according to $Q$}
+            	\STATE{randomly pick a vertex $v \in V \setminus H$ according to $Q$}
+            	% \STATE{draw $w$ uniformly at random from $[0,1]$} 
+                % \IF {$(u,v) \in E$} 
+                %     \STATE {$E_{C} \leftarrow E_{c} \setminus \lbrace(u,v)\rbrace$ with the probability $p(e)$}
+                % \ELSE 
+                %     \STATE{$E_{c} \leftarrow E_{c} \cup \lbrace(u,v)\rbrace$}
+                % \ENDIF 
+                \STATE{{\bf if} $(u,v) \in E$}
+                \STATE{{\bf then} $E_{C} \leftarrow E_{c} \setminus \lbrace(u,v)\rbrace$ with the probability $p(e)$}
+                \STATE{{\bf else}~$E_{c} \leftarrow E_{c} \cup \lbrace(u,v)\rbrace$} 
+            \UNTIL{$E_{C}=c|E|$}
+            \FORALL {$e \in E_{C}$} 
+            	\STATE {\textbf{compute} $\sigma(e)$}
+                \STATE {draw $w$ uniformly at random from $[0,1]$}
+                \STATE {{\bf if} $w <q$~{\bf then} $r_{e} \leftarrow U(0,1)$ }
+                \STATE {{\bf else} $r_{e} \leftarrow R_{\sigma(e)}$}
+				% \IF {$w < q$} \STATE{$r_{e} \leftarrow U(0,1)$}
+    %             \ELSE 
+    %             \STATE{$r_{e} \leftarrow R_{\sigma(e)}$}
+    %             \ENDIF
+                \STATE \textbf{$\hat{p}(e) \leftarrow p(e)+ (1-2p(e))\cdot r_{e}$}
+            \ENDFOR
+            \STATE {$\hat{\epsilon} \leftarrow \text{anonymityCheck}(\tilde{\mathcal{G}})$} 
+            % \IF{$\hat{\epsilon}<\epsilon$ and $\hat{\epsilon}< \tilde{\epsilon}$} 
+            % \STATE{$\tilde{\epsilon} \leftarrow \hat{\epsilon}$; $\tilde{\mathcal{G}} \leftarrow \hat{\mathcal{G}}$}
+            % \ENDIF
+            \STATE {{\bf if}~$\hat{\epsilon}<\epsilon$ and $\hat{\epsilon}$~{\bf then} $\tilde{\epsilon} \leftarrow \hat{\epsilon}$; $\tilde{\mathcal{G}} \leftarrow \hat{\mathcal{G}}$}
+        \ENDFOR 
+        \STATE {return $\langle \tilde{\epsilon}, \tilde{\mathcal{G}} \rangle$}
+      	\caption{GenObf}
+        \label{alg:genObf}
+    \end{algorithmic}
+    }
+\end{algorithm}

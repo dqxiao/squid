@@ -1,0 +1,49 @@
+\subsection{The \texttt{GenObf} Function}
+
+Now, we are ready to present the details of the  \texttt{GenObf()} function for finding 
+a $(k,\epsilon)$-obf instance for an input uncertain graph $\mathcal{G}$ in Algorithm \ref{alg:genObf}. The function receives the parameters that are originally passed to \SysName skeleton (Algorithm~\ref{alg:Skeleton}) including noise parameter $\sigma$.  
+
+
+
+\textbf{Uniquness \& Relevance Computation.}~~First, the function start with the computation of the uniqueness score and reliability relevance. (Lines 1 \& 2).
+These two invariants correspond to our goals of preserving privacy \& utility.   
+Based on these weighting factors, the \texttt{GenObf} then heuristically performs edge selection \& perturbation, i.e, use the noise budget in the most effective way. 
+
+
+\textbf{Exclusion.}~~Since it is allowed not to obfuscate $\epsilon|V|$ of the nodes per the problem definition, the algorithm leverages the two invariants highlighted above and selects a set $H$ of $\frac{\epsilon}{2}|V|$ nodes with the largest combined uniqueness and reliability relevance scores, and excludes them from subsequent obfuscation efforts. 
+
+\input{genObfuscation.tex}
+
+\textbf{Unifying Uniqueness and Relevance Score.}~~
+The set of nodes not in $H$ are the candidates  for anonymization. 
+To anonymize high-uniqueness vertices, higher noise need to be injected.
+Thus, edges associated with those vertices need to be sampled with a higher probability. 
+In contrast, to better preserve the graph structure, edges associated with high reliability-relevance nodes  need to be sampled with a smaller probability.
+In order to implement such sampling strategy, our algorithm assigns a probability $Q^{v}$ to every $v \in V \setminus H$ ($v$ in $V$ but not in $H$), 
+which is proportional to $v$'s uniqueness $U^{v}$ and inverse proportional to $v$'s reliability relevance $\mathcal{V}RR^{v}$. 
+
+ 
+
+\textbf{Edge Selection.}~~After that, the algorithm starts its $t$ trials for finding $\keobf$. Each trial first select  select a set of candidate edges $E_{c}$, which will be subject to probability perturbation.
+Initially $E_{c}$ is set to $E$. Then, the algorithm randomly selects two distinct vertices $u$ and $v$, according to their assigned probabilities. 
+The edge $(u,v)$ is then excluded from $E_{c}$ with the probability $p(e)$ if it is an edge in the original graph (Lines 14), 
+otherwise it is added to $E_{c}$ (Line 15).  
+The process is repeated until $E_{c}$ reaches the require size, which is controlled by the input parameter $c$ as mentioned in Section~\ref{sec:Skeleton}. 
+In typical uncertain graphs, the number of absent edges is usually significantly larger than the number of present uncertain edges. 
+Thus, the loop usually ends very quickly for small values of $c$. And, the resulting set $E_{c}$ includes most of edges in $E$. 
+
+\textbf{Edge Perturbation.}~~Next, we redistribute the noise budgets among all selected edges in proportion to their unify weighting factors. pecially, we define for each $e=(u,v) \in E_{c}$ , its uncertainty level, 
+\begin{equation*}
+    Q^{e}:= \frac{Q^{u}+Q^{v}}{2}
+    % \vspace{-1em}
+\end{equation*}
+and then set  
+\begin{equation*}
+    \sigma(e)=\sigma |E_{c}|  \cdot \frac{Q^{e}}{\sum_{e \in E_{c}} Q^{e}}
+    % \vspace{-1em}
+\end{equation*}
+so that the average of $\sigma(e)$ over all $e \in E_{C}$ equals $\sigma$.
+
+\textbf{Edge Probability Perturbation.}~~If we carefully perform edge prob altertion with the edge uncertainty levels, $\sigma(e)$, we effectively obfsucate node. In the following section, we will instantiate our ideas.
+
+\textbf{Success or Failure.} Finally, If the algorithm successfully finds $(k,\epsilon)$-obfuscated graph in one of its $t$ trials, it returns the obfuscated graph with minimal $\epsilon$. Otherwise, it indicates the failure by returning $\tilde{\epsilon}=1$. 
