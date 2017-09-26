@@ -3,7 +3,7 @@ The results in the previous section demonstrate the huge utility loss in the per
 
 \subsection{The Chameleon framework}
 \input{mainRoutine.tex}
-We now introduce the state-of-art perturbation algorithm~\cite{Boldi_Injecting_2012} that computes the noise needed to injected into the input \emph{determinitic} graph to obtain the desired privacy level. Each selected edge is altered based on a stochastic variable drawn from a trunated Normal distribution, $R(\sigma)$. This distribution has density function proportional to the Normal distribution, with mean $0$ and variance $\sigma^2$. Thus, small values of $\sigma$ contribute towards better utility, but at the same time they provide lower level of obfuscation. Targeting for high utility, the algorithm aims at injecting the minmal amount of noise need to achieve the required obfuscation. Its computation is achieved via a binary search on the value of the noise parameter $\sigma$, as shown in Algorithm~\ref{}. 
+We now introduce the state-of-art perturbation algorithm~\cite{Boldi_Injecting_2012} that computes the noise needed to injected into the input \emph{determinitic} graph to obtain the desired privacy level. Each selected edge is altered based on a stochastic variable drawn from a trunated Normal distribution, $R(\sigma)$. This distribution has density function proportional to the Normal distribution, with mean $0$ and variance $\sigma^2$. Thus, small values of $\sigma$ contribute towards better utility, but at the same time they provide lower level of obfuscation. Targeting for high utility, the algorithm aims at injecting the minmal amount of noise need to achieve the required obfuscation. Its computation is achieved via a binary search on the value of the noise parameter $\sigma$, as shown in Algorithm~\ref{alg:Skeleton}. 
 % change a litte 
 
 The binary search flow is determined by the \texttt{GenObf} function. 
@@ -47,4 +47,5 @@ Here, we set $\theta$ equals $\sigma_{\mathcal{G}}$ as the latter represents the
 \input{relevance.tex}
 \input{relevanceEvaluation.tex}
 \input{genObf.tex}
+\input{edgeProbAlter.tex}
 

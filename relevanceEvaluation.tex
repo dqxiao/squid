@@ -27,13 +27,12 @@ the number of connected pairs $cc(G)$. Then, the count on the original uncertain
     \label{fig:rrEval}
 %     \vspace{-1em}
 \end{figure}
-\begin{lemma}
-    The time complexity of Algorithm\ref{alg:RReval} $\mathcal{E}RR-$val is $\mathcal{O}(N \alpha(|V|) |E|)$ where $N$ is the number of samples.
-\end{lemma}
+
 Obviously, the baseline algorithm is inefficient when the input uncertain graph is very large (it is quadratic in the number of edges). Here, we present a efficient algorithm for $\mathcal{E}RR$ evaluation in Algorithm~\ref{alg:RReval}. Its basic idea is to re-use the connected components detection result of samples as illustrated in~\ref{fig:rrEval}. For each edge $e$, we group the sampled possible worlds according to the edge existence (Line 4-6), then get the sampled average of $cc$ for each group as accurate approximation of $cc(\mathcal{G}_{e})$ and $cc(\mathcal{G}_{\bar{e}})$. By this way, we bring the the evaluation of edge reliability relevance to the realm.  
 
-
-
+\begin{lemma}
+    The time complexity of Algorithm~\ref{alg:RReval} $\mathcal{E}RR-$val is $\mathcal{O}(N \alpha(|V|) |E|)$ where $N$ is the number of samples.
+\end{lemma}
 
 
 \begin{algorithm}[!tb]
