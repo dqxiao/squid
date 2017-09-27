@@ -50,11 +50,10 @@ In uncertain graphs, the concept of reliability is used to generalize \emph{conn
 \label{sec:AMPC}
 In this work, we focus on the ``identity disclosure problem"~\cite{Liu_Towards_2008} over uncertain graphs, which is one serious privacy leak concern when a graph dataset is published. Formally, give a published graph $G$, if and adversary can locate the target entity $t$ as a vertex $v$ of $G$ with a high probability via auxiliary information, we said that the identity of $t$ is disclosed. The popular assumption of auxiliary information is node degree~\cite{Liu_Towards_2008}. 
 
-Following the literature, we adopt the syntactic $\keobf$ criterion for privacy guarantee. 
-Analogous to the well known $k$-anonymity notion, $k$-obf requires to blend every vertex with \emph{other} fuzzy-matching nodes. 
-Compared to $k$-anonymity, $k$-obf, which is global and entropy-based quantification, is more adequate than the previous used local quantification based on a posteriori belief probabilities. An excellent discussion on $k$-obf was presented by Bonchi {\etal}~\cite{Bonchi_Identity_2014}. 
-Moreover, the introduction of a tolerance parameter $\epsilon$, which allows skipping up to $\epsilon * |V|$ nodes, makes it more practical. The skipped nodes might be extreme unique nodes, e.g., Trump in a Twitter network, whose obfuscation is almost impossible.
-The formal definition is as follows:
+Following the literature, we adopt the syntactic policy $\keobf$ for providing privacy guarantees. 
+Analogous to the well-known $k$-anonymity notion, $k$-obf requires to blend every node with \emph{other fuzzy-matching} nodes. 
+In the context of uncertain graphs, $K$-obf, which provides global and entropy-based quantification, is more adequate than $k$-anonymity that used local quantification based on a posteriori belief probabilities. An excellent discussion on $k$-obf was presented by Bonchi {\etal}~\cite{Bonchi_Identity_2014}. There might be extreme unique nodes, e.g., Trump in a Twitter network, whose obfuscation is almost impossible. Thus, on the basis of $k$-obf, \cite{Boldi_Injecting_2012} introduces a tolerance parameter $\epsilon$, which allows skipping up to $\epsilon * |V|$ nodes, makes it more practical. The formal definition is as follows. 
+
 \theoremstyle{definition}
 \begin{definition}
 	\textbf{\boldmath{$(k,\epsilon)$}-obf \cite{Boldi_Injecting_2012}}
