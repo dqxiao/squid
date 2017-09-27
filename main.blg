@@ -1,0 +1,60 @@
+This is BibTeX, Version 0.99d (TeX Live 2016)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main.aux
+The style file: abbrv.bst
+Database file #1: refs.bib
+Warning--string name "bvinfocom07" is undefined
+--line 63 of file refs.bib
+Warning--string name "blinfocom07" is undefined
+--line 65 of file refs.bib
+Warning--string name "bminfocom" is undefined
+--line 67 of file refs.bib
+Warning--empty journal in Colbourn_Colbourn_1987
+Warning--empty journal in Ghosh_On_2007
+Warning--empty journal in Hay_Anonymizing_2007
+Warning--empty journal in Kempe_Maximizing_2003
+Warning--empty publisher in lee2011
+Warning--empty journal in Thompson_The_2009
+Warning--empty journal in Ying_Randomizing_2008
+You've used 39 entries,
+            2118 wiz_defined-function locations,
+            703 strings with 9896 characters,
+and the built_in function-call counts, 11404 in all, are:
+= -- 1040
+> -- 754
+< -- 2
++ -- 300
+- -- 256
+* -- 735
+:= -- 2096
+add.period$ -- 117
+call.type$ -- 39
+change.case$ -- 244
+chr.to.int$ -- 0
+cite$ -- 46
+duplicate$ -- 410
+empty$ -- 718
+format.name$ -- 256
+if$ -- 2245
+int.to.chr$ -- 0
+int.to.str$ -- 39
+missing$ -- 39
+newline$ -- 198
+num.names$ -- 78
+pop$ -- 265
+preamble$ -- 1
+purify$ -- 206
+quote$ -- 0
+skip$ -- 305
+stack$ -- 0
+substring$ -- 289
+swap$ -- 51
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 154
+warning$ -- 7
+while$ -- 83
+width$ -- 41
+write$ -- 388
+(There were 10 warnings)

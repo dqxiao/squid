@@ -20,7 +20,7 @@ In this work, we assume the input uncertain graph undirected and contains no sel
 
 \subsection{Reliability-Based Utility Loss Metric}
 A well-chosen utility-loss metric may lead to substantially less sanitized graphs at a minimal loss of information. 
-As be known to all, connectivity is a fundamental graph property and plays an important role in graph mining tasks such as locating $k-$nearest neighbor~\cite{Potamias_K_2010}, graph clustering~\cite{Asthana_Predicting_2004} and shortest paths detecting~\cite{Zhao_Detecting_2014}. Moreover, the connectivity model has been shown to be able to yield better representation than degree sequence model. The connectivity discrepancy was proven to be a proper utility-loss metric. Therefore, we use its generalized version -- Reliability Discrepancy as the utility-loss metric in the uncertain graph context. 
+As be known to all, connectivity is a fundamental graph property and plays an important role in graph mining tasks such as locating $k-$nearest neighbor~\cite{Potamias_K_2010}, graph clustering~\cite{Asthana_Predicting_2004} and shortest paths detecting~\cite{Zhao_Detecting_2014}. Generally, the connectivity model has been shown to be able to yield better representation of graph than degree sequence model. Besides, connectivity discrepancy was proven to be a proper utility-loss metric in previous graph anonymization practice. In this work, we use its generalized version -- Reliability Discrepancy as the utility-loss metric in the uncertain graph context. 
  
 In uncertain graphs, the concept of reliability is used to generalize \emph{connectivity} by  capturing the probability that two given (sets of) nodes are reachable over all possible worlds of the uncertain graph as follows:
 \begin{definition}
@@ -35,10 +35,10 @@ In uncertain graphs, the concept of reliability is used to generalize \emph{conn
 
 \theoremstyle{definition}
 \begin{definition}
-    \textbf{Graph Reliability Discrepancy}
+    \textbf{Graph Reliability Discrepancy (GRD)}
     The reliability discrepancy of graph $\tilde{\mathcal{G}}=(V,E, \tilde{\mathit{p}})$, 
     denoted as $\Delta(\tilde{\mathcal{G}})$, 
-    w.r.t. an original graph  $\mathcal{G}=(V,E,\mathit{p})$  is 
+    w.r.t. the original graph  $\mathcal{G}=(V,E,\mathit{p})$  is 
     defined as the sum of the two-terminal reliability discrepancy over all node pair $(u,v) \in V_\mathcal{G}$.
     \begin{equation*}
         \Delta(\tilde{\mathcal{G}})=\sum_{(u,v) \in V_\mathcal{G} }|R_{u,v}(\mathcal{G})-R_{u,v}(\tilde{\mathcal{G}})|
@@ -46,11 +46,11 @@ In uncertain graphs, the concept of reliability is used to generalize \emph{conn
 \end{definition}
 
 
-\subsection{Attack Model and Privacy Criteria}
+\subsection{Attack Model and Privacy Policy}
 \label{sec:AMPC}
-In this paper, we focus on the ``identity disclosure problem"~\cite{Liu_Towards_2008} over uncertain graphs, which is one serious privacy leak concern when a graph dataset is published. Formally, give a published graph $G$, if and adversary can locate the target entity $t$ as a vertex $v$ of $G$ with a high probability via auxiliary information, we said that the identity of $t$ is disclosed. The popular assumption of auxiliary information is node degree~\cite{Liu_Towards_2008}. 
+In this work, we focus on the ``identity disclosure problem"~\cite{Liu_Towards_2008} over uncertain graphs, which is one serious privacy leak concern when a graph dataset is published. Formally, give a published graph $G$, if and adversary can locate the target entity $t$ as a vertex $v$ of $G$ with a high probability via auxiliary information, we said that the identity of $t$ is disclosed. The popular assumption of auxiliary information is node degree~\cite{Liu_Towards_2008}. 
 
-Following the literature, we adopt the syntactic $\keobf$ criterion~\cite{Boldi_Injecting_2012} for privacy guarantee. 
+Following the literature, we adopt the syntactic $\keobf$ criterion for privacy guarantee. 
 Analogous to the well known $k$-anonymity notion, $k$-obf requires to blend every vertex with \emph{other} fuzzy-matching nodes. 
 Compared to $k$-anonymity, $k$-obf, which is global and entropy-based quantification, is more adequate than the previous used local quantification based on a posteriori belief probabilities. An excellent discussion on $k$-obf was presented by Bonchi {\etal}~\cite{Bonchi_Identity_2014}. 
 Moreover, the introduction of a tolerance parameter $\epsilon$, which allows skipping up to $\epsilon * |V|$ nodes, makes it more practical. The skipped nodes might be extreme unique nodes, e.g., Trump in a Twitter network, whose obfuscation is almost impossible.

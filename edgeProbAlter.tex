@@ -16,8 +16,8 @@ Basically, \SysName alters the probability of a given edge $e \in E_{c}$ accordi
     \tilde{\mathit{p}}(e):=\mathit{p}(e) + (1-2 \mathit{p}(e)) \cdot r_{e} 
 %     \vspace{-0.5em}
 \end{equation*} 
-where the random perturbation $r_{e}$ is generated as indicated in Equation \ref{eq:gen} 
-% {\todo{Why the algorithm Line 22 has the equation in a different format....Its like you intentionally want to confuse reviewers...}}
+where $r_{e}$ is a stochastic variable drawn from the truncated normal distribution.  
+
 
 Namely, for a given edge $e$ with the probability $p(e)$, we only consider the potential edge probability $\tilde{p}$ in the limited range that 
 is more likely to contribute to a higher graph anonymity by maximizing the entropy level. 
@@ -80,13 +80,13 @@ going from fully satisfied to fully violated as follows.
     \label{eq:approximate}
 \end{equation}
 
-\begin{theorem}
+\begin{lemma}
 Let $\Omega$ presents the domain of degree values in the original uncertain graph, the maximization of the provided anonymity $\mathbb{C}$ is equivalent to the maximization of the following function:
   \begin{equation}
       \sum_{\omega \in \Omega} s(\omega) \cdot H(Y_{\omega}) 
       \label{eq:anonymity}
   \end{equation} 
-\end{theorem}
+\end{lemma}
 
 {\bf Proof Sketch:} First we can see that 
 \begin{align*}
@@ -102,16 +102,16 @@ Taking logarithm for both sides and combining with the approximation equation~\r
 Therefore, after removing the constant $\sum_{\omega} \log_{2}|V|$ from $\log(\mathcal{C})$, our goal is actually to maximize Equation~\ref{eq:anonymity}. It provides us with the relation between the global anonymity and the level of disorder of the degree uncertainty matrix.  
 
 % option a: use lemma with number, cross reference can be graceful 
-\begin{theorem}
+\begin{lemma}
 The maximization of Equation~\ref{eq:anonymity} is equivalent to maximization of the following function:
   \begin{equation}
       \sum_{\omega \in \Omega} s(\omega) \cdot H(Y_{\omega}) =\big[ \sum_{v \in V} H(d_{v})\big] + |V|\log{|V|}-|V|H(\Omega)
   \end{equation}
 The equation stems from the coding length of degree uncertainty matrix from different perspectives (row and column).\footnote{More detail of it is available in tech report.}
-\end{theorem}
+\end{lemma}
 It provides us with the mechanism for gaining better anonymity, namely increasing the degree uncertainty per vertex $H(d_{v})$. 
 
-\begin{theorem}
+\begin{lemma}
 As implied by the Central Limit Theorem, $d_{v}$ may be approximated by the normal distribution $\mathcal{N}(\mu,\sigma^2)$, where $\mu=\sum_{e \in \mathcal{E}^{v}} p(e)$ and $\sigma^2=\sum_{e \in \mathcal{E}^{v}} p(e)-p(e)^2$. Therefore, its entropy may be approximated by the differential entropy of the normal distribution $\frac{1}{2} \ln(2\pi\sigma^2) + \frac{1}{2}$. For a given $p(e)$, its gradient ascent is proportion to $1-2\cdot p(e)$. 
-\end{theorem}
+\end{lemma}
 Targeting at high entropy, we apply the gradient ascent method---$\hat{p}(e)=p(e)+ \big( 1-2\cdot p(e) \big) \cdot r_{e} $ for achieving the increase of degree entropy and the anonymity gain.

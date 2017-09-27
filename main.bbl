@@ -36,7 +36,13 @@ S.~Bhagat, G.~Cormode, B.~Krishnamurthy, and D.~Srivastava.
 \bibitem{Boldi_Injecting_2012}
 P.~Boldi, F.~Bonchi, A.~Gionis, and T.~Tassa.
 \newblock Injecting uncertainty in graphs for identity obfuscation.
-\newblock {\em SIGMOD}, 2012.
+\newblock {\em VLDB}, 2012.
+
+\bibitem{Boldi_Rosa_Vigna_2011}
+P.~Boldi, M.~Rosa, and S.~Vigna.
+\newblock {HyperANF}: approximating the neighbourhood function of very large
+  graphs on a budget.
+\newblock {\em CoRR}, 2011.
 
 \bibitem{Bollacker_Freebase_2008}
 K.~Bollacker, C.~Evans, P.~Paritosh, and T.~Sturge.
@@ -66,11 +72,6 @@ Colbourn and Colbourn.
 \newblock The combinatorics of network reliability.
 \newblock 1987.
 
-\bibitem{Das_Anonymizing_2010}
-S.~Das, O.~Egecioglu, and A.~Abbadi.
-\newblock Anonymizing weighted social network graphs.
-\newblock {\em ICDE}, pages 904--907, 2010.
-
 \bibitem{Wredman:1989:CPC:73007.73040}
 M.~Fredman and M.~Saks.
 \newblock The cell probe complexity of dynamic data structures.
@@ -97,12 +98,6 @@ M.~Hay, G.~Miklau, D.~Jensen, P.~Weis, and S.~Srivastava.
 \newblock Anonymizing social networks.
 \newblock 2007.
 
-\bibitem{Hua_Probabilistic_2010}
-M.~Hua and J.~Pei.
-\newblock Probabilistic path queries in road networks: traffic uncertainty
-  aware path selection.
-\newblock {\em EDBT}, 2010.
-
 \bibitem{Jin_Distance_2011}
 R.~Jin, L.~Liu, B.~Ding, and H.~Wang.
 \newblock Distance-constraint reachability computation in uncertain graphs.
@@ -124,12 +119,6 @@ J.~Lee and C.~Clifton.
 \newblock {\em How Much Is Enough? Choosing $\epsilon$ for Differential
   Privacy}.
 \newblock 2011.
-
-\bibitem{Liben_Nowell_Kleinberg_2007}
-D.~Liben~Nowell and J.~Kleinberg.
-\newblock The link prediction problem for social networks.
-\newblock {\em The American Society for Information Science and Technology},
-  2007.
 
 \bibitem{Lin_B2B}
 M.~Lin, M.~Lin, and R.~J. Kauffman.
@@ -180,6 +169,11 @@ M.~Skarkala, M.~Maragoudakis, S.~Gritzalis, L.~Mitrou, H.~Toivonen, and
   networks.
 \newblock {\em ASONAM}, 2012.
 
+\bibitem{Sweeney:2002:KAM:774544.774552}
+L.~Sweeney.
+\newblock K-anonymity: A model for protecting privacy.
+\newblock {\em Int. J. Uncertain. Fuzziness Knowl.-Based Syst.}, 2002.
+
 \bibitem{Thompson_The_2009}
 B.~Thompson and D.~Yao.
 \newblock The union-split algorithm and cluster-based anonymization of social
@@ -195,12 +189,6 @@ Y.~Wang, L.~Xie, B.~Zheng, and K.~C.~K. Lee.
 W.~Wu, Y.~Xiao, W.~Wang, Z.~He, and Z.~Wang.
 \newblock k-symmetry model for identity anonymization in social networks.
 \newblock {\em EDBT}, 2010.
-
-\bibitem{Ying2009}
-X.~Ying, K.~Pan, X.~Wu, and L.~Guo.
-\newblock Comparisons of randomization and k-degree anonymization schemes for
-  privacy preserving social network publishing.
-\newblock {\em SNA-KDD}, 2009.
 
 \bibitem{Ying_Randomizing_2008}
 X.~Ying and X.~Wu.

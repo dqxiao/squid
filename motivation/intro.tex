@@ -22,12 +22,10 @@ When compared to sharing the results of data mining, data publishing gives great
         \includegraphics[height=3cm]{ill/B2BNetwork.pdf}
       \end{minipage}
       }
-    \vspace{-10pt}
-    \caption{Examples of real-world uncertain graphs with privacy concerns.}
     \vspace{-5pt}
+    \caption{Examples of real-world uncertain graphs with privacy concerns.}
+    \vspace{-15pt}
 \end{figure}
-
-
 {\textbf{Motivation Scenario I (Social Trust Networks): }}
 {\em 
 In social networks, the trust and influence relationships among users---which may greatly impact users' behaviors---are usually probabilistic~\cite{Kempe_Maximizing_2003} 
@@ -48,7 +46,7 @@ Certainly, information about a company's transactions with other companies is co
 \vspace{2mm}
 These scenarios show the immediate need for efficient methods privacy preserving uncertain graph publishing, where sanitation or anonymization is applied to the input uncertain graph before publishing. Despite the number of graph anonymization techniques have been proposed~\cite{Liu_Towards_2008, Boldi_Injecting_2012,  Mittal_Preserving_2013, Bonchi_Identity_2014}, the ignorance of edge uncertainty makes them inefficient for uncertain graph sanitation task. The inefficiency can be due to various reasons ranging from the wrong assumption of privacy attacks to improper utility loss metrics. We face three key challenges in shifting conventional methods to privacy protection on \emph{uncertain graphs}. 
 
-\vspace{2mm}\hspace{-1em}
+% \vspace{2mm}\hspace{-1em}
 % \textbf{$\bullet$ Privacy Attacks leveraging Edge Uncertainty:} 
 % In Figure \ref{fig:motivation}, we show two instances of released (and {\em ``hopefully anonymized''}) graphs with the same exact topology. 
 % In Figure \ref{fig:motivation}(a), the graph is deterministic, while in Figure \ref{fig:motivation}(b), the graph is uncertain with probabilities associated to its edges. 
@@ -63,17 +61,15 @@ These scenarios show the immediate need for efficient methods privacy preserving
 % Therefore, uncertain graph anonymization must take into consideration these edge uncertainties, otherwise, it will fail to protect the privacy correctly.  
 % Evidently, ignoring the probabilities altogether and not adding them to the released graph in Figure \ref{fig:motivation}(b) is not a practical solution as it 
 % severely destroys  the structure and the utility of the original graph. 
-
-
 \vspace{2mm}\hspace{-1em}
 \textbf{$\bullet$ Appropriate Utility Loss Metric for Uncertain Graphs:} 
 Ideally, the anonymized graph should preserve the privacy with the smallest utility loss for further analysis tasks. Thus, it is crucial to understand and model the utility loss of \emph{uncertain graph} being published through well-defined metrics. 
-There have been many attempts such as Graph Edit Distance~\cite{Liu_Towards_2008}, Spectrum Discrepancy~\cite{Ying_Randomizing_2008}, Community Reconstruction Error~\cite{Wang2011} and Shortest Path Discrepancy~\cite{Liu_Privacy_2009}.  Most of them heavily tailored towards for deterministic graphs and built on the top of \emph{deterministic} graph concepts. Thus, they are unreasonable when dealing with uncertain graphs. What is the appropriate metric? How is it integrated into anonymization process as replacement of conventional ones? These questions should be carefully addressed when dealing with uncertain graph anonymization. 
+There have been many attempts such as Graph Edit Distance~\cite{Liu_Towards_2008}, Spectrum Discrepancy~\cite{Ying_Randomizing_2008}, Community Reconstruction Error~\cite{Wang2011} and Shortest Path Discrepancy~\cite{Liu_Privacy_2009}.  Most of them are heavily tailored towards for deterministic graphs and built on the top of \emph{deterministic} graph concepts. Thus, they are unreasonable when dealing with uncertain graphs. What is the appropriate metric? How is it integrated into anonymization process as replacement of conventional ones? These questions should be carefully addressed when dealing with uncertain graph anonymization. 
 
 \vspace{2mm}\hspace{-1em}
 \textbf{$\bullet$ Increased Exponential Complexity of Uncertain Graph Anonymization:}
 The problem of $k$-anonymizing a given deterministic graph by as few graph contractions (edge addition, edge deletion, vertex addition and vertex deletion) as possible is shown to be NP-hard~\cite{Hartung_Theory_2015}. Existing techniques usually rely on heuristics to avoid combinatorial
-intractability. In uncertain graphs, the problem is even harder since an edge operation is no longer a binary operation (addition or deletion), but there can be infinite probability values that can be assigned to each edge. Therefore, efficient {\em uncertainty-aware} heuristics need to be developed to bring the solution to the realm of feasibility.
+intractability. In uncertain graphs, the problem is even harder since an edge operation is no longer a binary operation (addition or deletion), but there can be infinite probability values that can be assigned to each edge. Clearly, efficient uncertainty-aware heuristics should be developed to bring the solution to the realm of feasiblity. 
 
 
 %A straightforward approach for anonymizing a given uncertain graph $\mathcal{G}$ which works around ever-mentioned challenges is to combine two existing---but isolated---pieces of work in literature. 
@@ -91,9 +87,9 @@ intractability. In uncertain graphs, the problem is even harder since an edge op
 \vspace{2mm}
 
 
-In this paper, we present a principled extension of graph anonymization techniques in the presentence of uncertainty, called \SysName. 
+In this paper, we present a principled extension of graph anonymization techniques in the presentence of uncertainty, called \SysNameNS. 
 \SysName incorporates edge uncertainties into the core of the  anonymization processing such as evaluations of privacy gain and utility loss. 
-In contrast to the classical deterministic graph utility metrics, we propose a new utility metric based on the {\em reliability} measure---which is a core metric in numerous uncertain graph applications~\cite{Asthana_Predicting_2004,Zhao_Detecting_2014,Ghosh_On_2007}. 
+In practicular, we propose a new utility metric based on the {\em reliability} measure---which is a core metric in numerous uncertain graph applications~\cite{Asthana_Predicting_2004,Zhao_Detecting_2014,Ghosh_On_2007}. 
 The anonymization process need to change the graph structure by modifying the edge probabilities of a subset of the edges, which is an exponential search space. 
 Therefore, we propose a ranking algorithm that ranks the edges w.r.t the impact of a change on the graph structure---which we refer to as {\em ``reliability Relevance''}---and 
 that ranking will guide the edge selection process. 
