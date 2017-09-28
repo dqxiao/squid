@@ -1,13 +1,13 @@
 \section{Introduction}
 \label{sec:Intro}
 
-In many prevalent application domains, such as business to business (B2B)~\cite{Lin_B2B}, social networks~\cite{Adar_Managing_2007,Kempe_Maximizing_2003}, and sensor networks~\cite{ZhangSensorNetwork}, graphs serve as powerful models to capture the complex relationships inherent in these applications. 
-Most graphs in these applications are uncertain by nature, where each edge carries a degree of uncertainty (probability) representing the probability of its presence in the real world. This uncertainty can be due to various reasons ranging from the use of prediction models to predict the edges (as in social media and B2B networks)  to physical properties that affect the edges' reliabilities (as in sensor and communication networks).  
+In several emerging applications, such as business to business (B2B)~\cite{Lin_B2B}, social networks~\cite{Adar_Managing_2007, Kempe_Maximizing_2003}, and sensor networks~\cite{ZhangSensorNetwork}, graphs serve as powerful models to capture the complex relationships inherent in these applications. 
+Most graphs in these applications are uncertain by nature, where each edge carries a degree of uncertainty (probability) representing the probability of its presence in the real world. This uncertainty can be due to various reasons ranging from the use of prediction models to predict the edges (as in social media and B2B networks) to physical properties that affect the edges' reliabilities (as in sensor and communication networks).  
 
 These uncertain graphs are of significant importance to support various data mining tasks {\eg}, 
 understanding  graph structures~\cite{Bollacker_Freebase_2008,Krogan_Global_2006}, social interactions~\cite{Cho_Friendship_2011}, 
 information discovery and propagation~\cite{Zhao_Detecting_2014}, advertising and marketing~\cite{Kempe_Maximizing_2003}, among many others.
-When compared to sharing the results of data mining, data publishing gives greater flexibility for unlimited analysis,  wider data exploration. However, the publishing of these uncertain graphs might violate participants' privacy.   
+When compared to sharing the results of data mining, data publishing gives greater flexibility for unlimited analysis,  wider data exploration. However, sharing these uncertain graphs might violate participants' privacy.   
 
 \begin{figure}[!htb]
     \subfigure[Social Trust Network]{\label{fig:socialNetwork}
@@ -29,10 +29,11 @@ When compared to sharing the results of data mining, data publishing gives great
 {\textbf{Motivation Scenario I (Social Trust Networks): }}
 {\em 
 In social networks, the trust and influence relationships among users---which may greatly impact users' behaviors---are usually probabilistic~\cite{Kempe_Maximizing_2003} 
-(See Figure~\ref{fig:socialNetwork}). The existence of the trust relationship depends on many factors, such as the area of expertise and emotional connections.
+(See Figure~\ref{fig:socialNetwork}). The existence of the trust relationship depends on many factors, such as the area of expertise and emotional connections. 
+It is forbidden to release interaction details. It is a plausible solution to share uncertain graph whose edge probability may represent the outcome of prediction model built.
 Studying the structure of \emph{real} social trust networks cam produce insights on product promotion, information dissemination. 
 However, the release of such uncertain graphs with simple anonymization may cause serious privacy issues.
-Equipped with prior knowledge, the attackers can re-identify private and sensitive information, such as the identity of the users and their trustiness relationship, from the released data.
+Equipped with prior knowledge, the attackers can re-identify private and sensitive information, such as the identity of the users and their trustiness relationship.
 }
 
 \vspace{2mm}

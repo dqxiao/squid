@@ -1,11 +1,10 @@
 \subsection{Reliability Relevance}
 
-\textbf{\emph{Observation}}~~ 
-% When an uncertain edge is altered (partial added or deleted), it will result in the change of reliability. 
-Clearly, alteration over an single uncertin edge (partial added or deleted) can produce structural changes that send ripples through the rest of the graph. 
+\textbf{\emph{Observation}}~~Namely, alteration over any single uncertain edges (partial added or deleted) would produce structural changes that send ripples through the rest of the graph. 
 The same amount of alteration performed over different edges may incur significantly different structure change. 
 Referring to the example in Figure~\ref{fig:edgeRRGraph}, two vertices $\tt{a}$ and $\tt{e}$ will be assigned the same {\em uniqueness score} due to the exact probabilities associated with their edges. 
-As a result, the {\em anonymity-oriented} strategy would select and perturb either of the two edges $(\tt{a},\tt{c})$ and $(\tt{c},\tt{e})$ with the same probability. However, the modifications to $(\tt{c},\tt{e})$---which is the only link between two~\emph{reliable} clusters---clearly incurs much larger structure distortion than that on $(\tt{a},\tt{c})$.To control the utility loss, it is cruical to quantify the structural impact of a single edge unit alteration. 
+As a result, the {\em anonymity-oriented} strategy would select and perturb either of the two edges $(\tt{a},\tt{c})$ and $(\tt{c},\tt{e})$ with the same probability. However, the modifications to $(\tt{c},\tt{e})$---which is the only link between two~\emph{reliable} clusters---clearly incurs much larger structure distortion than that on $(\tt{a},\tt{c})$. To control the utility loss, it is cruical to quantify the structural impact of a single edge alteration by any granularity. 
+
 
 
 \textbf{Contribution.}~~To this end, we propose a theoretically sound estimation for the {\em ``reliability deviation''} caused by individual uncertain edge modifications in a fine-grained way. 
@@ -16,7 +15,7 @@ Following this path, we introduce a new measure, called {\em Edge Reliability Re
   \vspace{-1em}
     %\captionsetup{justification=centering,margin=0cm}
   \subfigure[An uncertain graph]{\label{fig:edgeRRGraph}  %(22)
-    \begin{minipage}[l]{0.4\columnwidth}
+    \begin{minipage}[l]{0.45\columnwidth}
       \centering
       \includegraphics[height=3cm]{AddFigure/bridgetExample.pdf}
     \end{minipage}
@@ -24,13 +23,13 @@ Following this path, we introduce a new measure, called {\em Edge Reliability Re
   \subfigure[The reliability $R_{a,e}$ v.s $p(e)$]{\label{fig:edgeRR}  %(22)
     \begin{minipage}[l]{0.5\columnwidth}
       \centering
-      \includegraphics[height=3cm]{ill/rrIll.eps}
+      \includegraphics[height=3cm]{AddFigure/ErrExample.pdf}
     \end{minipage}
   }
-    \vspace{-1em}
+    % \vspace{-1em}
     \caption{(a) Different edges have different effect on the overall graph reliability. (b) Formal {\em Reliability Relevance } measure. A bigger edge's slope indicates  
      big distortion in reliability under small changes to the edge's probability.}
-    \vspace{-0.5em}
+    \vspace{-15pt}
 \end{figure}
 
 
@@ -60,7 +59,7 @@ Following this path, we introduce a new measure, called {\em Edge Reliability Re
 Lemma~\ref{lemma:fac} indicates that the \emph{deviation} of $R_{u,v}$ introduced by a specific edge $e$ is \emph{linear} to the amount of edge probability deviation as shown in Figure~\ref{fig:edgeRR}. In other words, the edge reliability relevance $\mathcal{E}RR^{e}_{u,v}$ equals to the difference of $R_{u,v}$ in the corresponding neighbor \emph{uncertain graphs} $\mathcal{G}_{e}$ and $\mathcal{G}_{\bar{e}}$. First, we remind the reader that edge reliability relevance always be positive since all the connected pairs in $\mathcal{G}_{e}$ are guaranteed to be a superset or at least equal to that in $\mathcal{G}_{\bar{e}}$.
 
 
-By aggregating edge relevance among all the node pairs $u,v$, we can get the overall {\em reliability relevance} of edge $e$ $\mathcal{E}RR^{e}(\mathcal{G})$ defined as 
+By aggregating edge relevance among all the node pairs $\langle u,v \rangle$, we can get the overall {\em reliability relevance} of edge $e$ $\mathcal{E}RR^{e}(\mathcal{G})$ defined as 
 \begin{align*}
     \vspace{-1em}
     \mathcal{E}RR^e(\mathcal{G}) &= \sum_{u,v} |\mathcal{E}RR^e_{u,v}(\mathcal{G})| \\

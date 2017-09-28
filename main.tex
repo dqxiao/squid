@@ -20,7 +20,9 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{caption}
-\usepackage{cite} 
+% \usepackage[compress]{cite}
+\usepackage[numbers,sort&compress]{natbib}
+\renewcommand{\bibfont}{\footnotesize}
 \usepackage{amsfonts} % for mathbb
 
 \let\proof\relax
@@ -33,8 +35,9 @@
 \usepackage[ruled]{algorithm}
 \usepackage{algorithmic}
 \renewcommand{\algorithmiccomment}[1]{\bgroup #1 \egroup}
+
 % to sort cite 
-\usepackage{multirow} % to use multirow 
+% \usepackage{multirow} % to use multirow 
 
 
 \newcommand{\ie}[0]{\textit{i.e.}}
@@ -97,7 +100,8 @@ To overcome such limitation, our work seeks a solution to release \emph{uncertai
 \input{chamelon.tex}
 \input{experiment/experiment}
 \input{conclusion.tex}
-\bibliographystyle{abbrv}
+\bibliographystyle{abbrvnat}
+% \bibliographystyle{abbrv}
 \bibliography{refs}
 
 \end{document}

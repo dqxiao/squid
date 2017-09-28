@@ -1,9 +1,9 @@
 \section{Benchmark Solution}
 \label{sec:repOB}
-Before jumping to the design of new methods for \emph{uncertain} graphs, we first consider somehow applying existing methods designed for deterministic graphs. 
+Before introducing new methods designed for \emph{uncertain} graphs, we first consider \emph{somehow} applying existing methods designed for deterministic graphs. 
 In this work, we introduce the representative anonymization (Rep-An) algorithm that combines isolated but complementary work from literature for uncertain graph anonymization. 
 
-As shown in Figure\ref{fig:repOB}, we first extract a \emph{single} \emph{representative} instance from the original uncertain graph. Then, conventional anonymization techniques can be applied on this representative to attain closely approximate anonymized output of the original uncertain graph. There has been extensive work on extracting a single representative instance (deterministic one) of uncertain graphs that capturing graph statistics such as the expected vertex degrees~\cite{Parchas_Gullo_Papadias_Bonchi_2014}. This body of research comes to its aid that anonymization can be carried out on uncertain graphs, regardless of the uncertainty inherent in the data. 
+As shown in Figure~\ref{fig:repOB}, we first extract a \emph{single} \emph{representative} instance from the original uncertain graph. Then, conventional anonymization techniques can be applied on this representative to attain closely approximate anonymized output of the original uncertain graph. There has been extensive work on extracting a single representative instance (deterministic one) of uncertain graphs that capturing graph statistics such as the expected vertex degrees~\cite{Parchas_Gullo_Papadias_Bonchi_2014}. This body of research comes to its aid that anonymization can be carried out on uncertain graphs, regardless of the uncertainty inherent in the data. 
 
 \begin{figure}[t]
   \vspace{-1em}
@@ -24,7 +24,7 @@ As shown in Figure\ref{fig:repOB}, we first extract a \emph{single} \emph{repres
         Graph    & Nodes    & Edges    &Edge Prob    & Tolerance level\\
         \hline  
         DBLP     &824,774   &5,566,096 & 0.46        & $10^{-4}$\\
-        \small{BRIGHTKITE} &58,228   & 214,078 &0.29 &$10^{-3}$ \\
+        BK       &58,228   & 214,078 &0.29 &$10^{-3}$ \\
         PPI      &12,420   & 397,309  & 0.29         &$10^{-2}$\\
         \hline
         \end{tabular}
@@ -48,7 +48,7 @@ As shown in Figure\ref{fig:repOB}, we first extract a \emph{single} \emph{repres
     \vspace{-10pt}
     \caption{Edge probability\& degree distributions.}
     \label{fig:summary_graph}
-   \vspace{-15pt}
+   \vspace{-5pt}
 \end{figure}
 
 
@@ -59,7 +59,7 @@ As shown in Figure\ref{fig:repOB}, we first extract a \emph{single} \emph{repres
         \includegraphics[width=1\linewidth]{rep_exp/dblp_rel.pdf}
       \end{minipage}
       }
-    \subfigure[\small{BRIGHTKITE}]{\label{fig:bright_rep}
+    \subfigure[\footnotesize{BRIGHTKITE}]{\label{fig:bright_rep}
       \begin{minipage}[l]{0.62\columnwidth}
         \centering
         \includegraphics[width=1\linewidth]{rep_exp/bright_rel.pdf}
@@ -78,16 +78,16 @@ As shown in Figure\ref{fig:repOB}, we first extract a \emph{single} \emph{repres
     \vspace{-5pt}
 \end{figure*}
 
-However, this approach has several limitations. First, the input edge uncertainties (probabilities) are no longer integrated into the anonymization process since they are detached from the graph in the first step. Second, since the two phases are isolated from each other, different phases might be optimized for different metrics.  As the result, this benchmark solution Rep-An introduces a high level of noise and consequently deteriorates the overall utility.
+However, this approach has several limitations. First, the input edge uncertainties (probabilities) are no longer integrated into the anonymization process since they are detached from the graph in the first step. Second, since the two phases are isolated from each other, different phases might be optimized for different metrics. As the result, this benchmark solution Rep-An introduces a high level of noise and consequently deteriorates the overall utility.
 
 \subsection{Validation on Real Uncertain Graphs}
 In this section, we empirically evaluate the impact of noise injected to extracted \emph{representative} instances on real uncertain graphs. 
 
 \textbf{Uncertain Graph Collections.}~~We use three uncertain graphs that capture different real-world scenarios and have been used in prior uncertain graph mining studies. Table~\ref{tab:dataset} lists uncertain graphs and their tolerance parameters used in our evaluation.
 
-\textsc{DBLP} is a co-authorship network where the probability of an edge between two authors represents the likelihood two authors will collaborate in the future. The probability is obtained by a predictive model based on historical co-authorship data.~\cite{Jin_Distance_2011}. 
+\textsc{DBLP}~\cite{dblps} is a co-authorship network where the probability of an edge between two authors represents the likelihood two authors will collaborate in the future. The probability is obtained by a predictive model based on historical co-authorship data~\cite{Jin_Distance_2011}. 
 
-\textsc{Brightkite} is a location-based social network where the probability of an edge between two users corresponds to the chance that two users visit each other. The probability can be obtained by a prediction model based on historical user location data~\cite{Cho_Friendship_2011}. Generally, location data is considered sensitive for personal security issues. 
+\textsc{BrightKite}~\cite{snapnets} is a location-based social network where the probability of an edge between two users corresponds to the chance that two users visit each other. The probability can be obtained by a prediction model based on historical user location data~\cite{Cho_Friendship_2011}. Generally, location data is considered to be sensitive because of personal security issues. 
 
 \textsc{PPI} is a dataset of protein-protein interactions, provided by Disease Module Identification DREAM Challenge, where the probability of any edge corresponds to the confidence that the interaction actually exists.
 The probability is obtained through biological experiments.
@@ -106,8 +106,7 @@ We also present their degree distributions of ``unique'' nodes (with high degree
 To better understand the limitation of Rep-An, we report the potential lower-bound on the error that could be achieved via Chameleon methods in Figure~\ref{fig:rep_exp}. Figure~\ref{fig:rep_exp} shows that the utility loss of the Rep-An strategy can largely be attributed to the overlook of edge uncertainty. 
 The large deviation is largely due to the representative extraction step. In the extreme case where $k=100$ (i.e. weak privacy guarantee requires little noise), the sole representative extraction step produces high reliability errors (i.e, structural distortion). 
 
-The \textsc{DBLP} graph shows a more evident gap. For small $k$ values, i.e., $k=100$ and $k=150$, the largest error is within 30\% from the original graph values. The \textsc{DBLP} graph shows a more evident gap because a large amount of edge probability altered in the representative extraction step. Thus, it can produce cumulative structural changes. 
-  
+The \textsc{DBLP} graph shows a more evident gap. For small $k$ values, i.e., $k=100$ and $k=150$, the largest error is within 30\% from the original graph values. The \textsc{DBLP} graph shows a more evident gap because the representative extraction processing alters a large amount of edge probability, consequently, introduces huge structural change. 
 % add one sentence about the
 % add more sentences to highlight their difference. 
 
