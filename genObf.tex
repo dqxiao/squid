@@ -13,7 +13,6 @@ Based on these weighting factors, the \texttt{GenObf} then heuristically perform
 \textbf{Exclusion.}~~Since it is allowed not to obfuscate $\epsilon|V|$ of the nodes per the problem definition, the algorithm leverages the two invariants highlighted above and selects a set $H$ of $\frac{\epsilon}{2}|V|$ nodes with the largest combined uniqueness and reliability relevance scores, and excludes them from subsequent obfuscation efforts. 
 
 \input{genObfuscation.tex}
-
 \textbf{Unifying Uniqueness and Relevance Score.}~~
 Nodes not in $H$ are candidates for anonymization. 
 To anonymize high-uniqueness vertices, higher noise needs to be injected. Thus, edges associated with those vertices need to be sampled with a higher probability. Meanwhile, to better preserve the graph structure, edges associated with high reliability-relevance nodes need to be sampled with a smaller probability.

@@ -4,34 +4,36 @@
 In several emerging applications, such as business to business (B2B)~\cite{Lin_B2B}, social networks~\cite{Adar_Managing_2007, Kempe_Maximizing_2003}, and sensor networks~\cite{ZhangSensorNetwork}, graphs serve as powerful models to capture the complex relationships inherent in these applications. 
 Most graphs in these applications are uncertain by nature, where each edge carries a degree of uncertainty (probability) representing the probability of its presence in the real world. This uncertainty can be due to various reasons ranging from the use of prediction models to predict the edges (as in social media and B2B networks) to physical properties that affect the edges' reliabilities (as in sensor and communication networks).  
 
-These uncertain graphs are of significant importance to support various data mining tasks {\eg}, 
-understanding  graph structures~\cite{Bollacker_Freebase_2008,Krogan_Global_2006}, social interactions~\cite{Cho_Friendship_2011}, 
+% These uncertain graphs are of significant importance to support various data mining tasks {\eg}, 
+% understanding  graph structures~\cite{Bollacker_Freebase_2008,Krogan_Global_2006}, social interactions~\cite{Cho_Friendship_2011}, 
+% information discovery and propagation~\cite{Zhao_Detecting_2014}, advertising and marketing~\cite{Kempe_Maximizing_2003}, among many others.
+These real \emph{uncertain} graphs is invaluable and can be used for various graph analysis tasks {\eg}, understanding  graph structures~\cite{Bollacker_Freebase_2008,Krogan_Global_2006}, social interactions~\cite{Cho_Friendship_2011}, 
 information discovery and propagation~\cite{Zhao_Detecting_2014}, advertising and marketing~\cite{Kempe_Maximizing_2003}, among many others.
-When compared to sharing the results of data mining, data publishing gives greater flexibility for unlimited analysis,  wider data exploration. However, sharing these uncertain graphs might violate participants' privacy.   
+Compared to sharing the results of graph mining, graph publishing gives greater flexibility for unlimited analysis,  wider data exploration. However, sharing these uncertain graphs might violate participants' privacy.   
 
 \begin{figure}[!htb]
     \subfigure[Social Trust Network]{\label{fig:socialNetwork}
-      \begin{minipage}[l]{0.4\columnwidth}
+      \begin{minipage}[l]{0.45\columnwidth}
         \centering
         \includegraphics[height=3cm]{ill/SocialNetwork.pdf}
       \end{minipage}
       }
     \subfigure[B2B Network]{\label{fig:b2bNetwork}
-      \begin{minipage}[l]{0.4\columnwidth}
+      \begin{minipage}[l]{0.45\columnwidth}
         \centering
         \includegraphics[height=3cm]{ill/B2BNetwork.pdf}
       \end{minipage}
       }
-    \vspace{-5pt}
-    \caption{Examples of real-world uncertain graphs with privacy concerns.}
+    \vspace{-3pt}
+    \caption{Real-world uncertain graphs with privacy concerns.}
     \vspace{-15pt}
 \end{figure}
 {\textbf{Motivation Scenario I (Social Trust Networks): }}
 {\em 
 In social networks, the trust and influence relationships among users---which may greatly impact users' behaviors---are usually probabilistic~\cite{Kempe_Maximizing_2003} 
 (See Figure~\ref{fig:socialNetwork}). The existence of the trust relationship depends on many factors, such as the area of expertise and emotional connections. 
-It is forbidden to release interaction details. It is a plausible solution to share uncertain graph whose edge probability may represent the outcome of prediction model built.
-Studying the structure of \emph{real} social trust networks cam produce insights on product promotion, information dissemination. 
+It is forbidden to release interaction details. One plausible solution is to share uncertain graph whose edge probability may represent the outcome of prediction model built over interaction details.
+Studying the structure of \emph{real} social trust networks can produce insights on product promotion, information dissemination. 
 However, the release of such uncertain graphs with simple anonymization may cause serious privacy issues.
 Equipped with prior knowledge, the attackers can re-identify private and sensitive information, such as the identity of the users and their trustiness relationship.
 }
@@ -39,15 +41,29 @@ Equipped with prior knowledge, the attackers can re-identify private and sensiti
 \vspace{2mm}
 {\textbf{Motivation Scenario II (B2B Networks): }}
 {\em  Another example comes from Businesses to Businesses network (See Figure~\ref{fig:b2bNetwork}). In these networks, e.g., ``Alibaba'', nodes represent companies (or business in general) 
-while edges represent the trust and the likelihood of future transactions among them~\cite{Lin_B2B}. Such future interactions are probabilistic and obtained by prediction models. The historical transaction releasing is forbidden by legal regulation. 
+while edge probabilities represent the trust and the likelihood of future transactions among them~\cite{Lin_B2B}. Such future interactions are probabilistic and obtained by prediction models since the historical transaction releasing is forbidden by legal regulation. 
 B2B networks can be analyzed and mined for various applications including advertisement targeting~\cite{Abrahams20132777} and customer segmenting~\cite{alsina2015targeting}. 
 Certainly, information about a company's transactions with other companies is considered sensitive data since any leak can be used to infer the company's financial conditions.
 }
  
 \vspace{2mm}
-These scenarios show the immediate need for efficient methods privacy preserving uncertain graph publishing, where sanitation or anonymization is applied to the input uncertain graph before publishing. Despite the number of graph anonymization techniques have been proposed~\cite{Liu_Towards_2008, Boldi_Injecting_2012,  Mittal_Preserving_2013, Bonchi_Identity_2014}, the ignorance of edge uncertainty makes them inefficient for uncertain graph sanitation task. The inefficiency can be due to various reasons ranging from the wrong assumption of privacy attacks to improper utility loss metrics. We face three key challenges in shifting conventional methods to privacy protection on \emph{uncertain graphs}. 
+These scenarios show the immediate need for methods that safely share \emph{uncertain} graphs without compromising privacy. 
+Despite the number of graph anonymization techniques have been proposed~\cite{Liu_Towards_2008, Boldi_Injecting_2012,  Mittal_Preserving_2013, Bonchi_Identity_2014}, the ignorance of edge uncertainty makes them inefficient for uncertain graph sanitation task. The inefficiency can be due to various reasons ranging from the wrong assumption of privacy attacks to improper utility loss metrics. We face three key challenges in shifting conventional methods to the context of \emph{uncertain} graphs.
 
-% \vspace{2mm}\hspace{-1em}
+\begin{figure}
+  \centering
+  \vspace{-5pt}
+  \includegraphics[height=3cm]{AddFigure/privacyIssue.pdf}
+   \vspace{-5pt}
+  \caption{Privacy Protection Issues in Uncertain Graph.}
+  \label{fig:privacyIssue}
+  \vspace{-15pt}
+\end{figure}
+
+\vspace{2mm}\hspace{-1em}
+\textbf{$\bullet$ Privacy Protection Issue with Uncertain Graphs.}~~
+Discarding edge uncertainty in the released graph is not a practical solution since it severely destroys \emph{uncertain} graph's structure. 
+However, the addition of edge uncertainty to the graph makes the privacy protection problem far more difficult from the perspective of uncertainty. To explore this point further, we show a 2-dimensional view of \emph{node embedding} of an \emph{uncertain} graph in Figure~\ref{fig:privacyIssue}. We have also illustrated two nodes with the corresponding contours of uncertainty. In the ignorance of uncertainty, we would be more likely to label X as a ``distinctive" node that can be easily de-anonymized, since it seems further away from the other nodes. In fact, the node $Y$ is more vulnerable to de-anonymization attacks, since the corresponding contours do not overlap with others. Therefore, uncertain graph anonymization must take into consideration these edge uncertainties, otherwise, it will fail to protect the privacy correctly. 
 % \textbf{$\bullet$ Privacy Attacks leveraging Edge Uncertainty:} 
 % In Figure \ref{fig:motivation}, we show two instances of released (and {\em ``hopefully anonymized''}) graphs with the same exact topology. 
 % In Figure \ref{fig:motivation}(a), the graph is deterministic, while in Figure \ref{fig:motivation}(b), the graph is uncertain with probabilities associated to its edges. 
@@ -59,16 +75,17 @@ These scenarios show the immediate need for efficient methods privacy preserving
 % the adversary has more confidence (around 90\%) that {\tt Ana} maps to Node {\tt a}. 
 
 % This example shows that the release of the associated edge uncertainty increases the potential privacy risk. 
-% Therefore, uncertain graph anonymization must take into consideration these edge uncertainties, otherwise, it will fail to protect the privacy correctly.  
+ 
 % Evidently, ignoring the probabilities altogether and not adding them to the released graph in Figure \ref{fig:motivation}(b) is not a practical solution as it 
 % severely destroys  the structure and the utility of the original graph. 
 \vspace{2mm}\hspace{-1em}
-\textbf{$\bullet$ Appropriate Utility Loss Metric for Uncertain Graphs:} 
-Ideally, the anonymized graph should preserve the privacy with the smallest utility loss for further analysis tasks. Thus, it is crucial to understand and model the utility loss of \emph{uncertain graph} being published through well-defined metrics. 
-There have been many attempts such as Graph Edit Distance~\cite{Liu_Towards_2008}, Spectrum Discrepancy~\cite{Ying_Randomizing_2008}, Community Reconstruction Error~\cite{Wang2011} and Shortest Path Discrepancy~\cite{Liu_Privacy_2009}.  Most of them are heavily tailored towards for deterministic graphs and built on the top of \emph{deterministic} graph concepts. Thus, they are unreasonable when dealing with uncertain graphs. What is the appropriate metric? How is it integrated into anonymization process as replacement of conventional ones? These questions should be carefully addressed when dealing with uncertain graph anonymization. 
+\textbf{$\bullet$ Appropriate Utility Loss Metric for Uncertain Graphs.}~~
+Ideally, the anonymized graph should protect privacy with
+as small utility loss as possible for further analysis tasks. Thus, we need a well-defined metric to accurately capture the utility loss of \emph{uncertain graph} after noise injecting. 
+There have been many attempts such as Graph Edit Distance~\cite{Liu_Towards_2008}, Spectrum Discrepancy~\cite{Ying_Randomizing_2008}, Community Reconstruction Error~\cite{Wang2011} and Shortest Path Discrepancy~\cite{Liu_Privacy_2009}.  Most of them are heavily tailored towards deterministic graphs and built on the top of \emph{deterministic} graph concepts. Thus, they are unreasonable when dealing with uncertain graphs. What is the appropriate metric? How is it computed? How is it integrated into anonymization process as replacement of conventional ones? These questions should be carefully addressed when dealing with uncertain graph anonymization. 
 
 \vspace{2mm}\hspace{-1em}
-\textbf{$\bullet$ Increased Exponential Complexity of Uncertain Graph Anonymization:}
+\textbf{$\bullet$ Increased Exponential Complexity of Uncertain Graph Anonymization.}~~
 The problem of $k$-anonymizing a given deterministic graph by as few graph contractions (edge addition, edge deletion, vertex addition and vertex deletion) as possible is shown to be NP-hard~\cite{Hartung_Theory_2015}. Existing techniques usually rely on heuristics to avoid combinatorial
 intractability. In uncertain graphs, the problem is even harder since an edge operation is no longer a binary operation (addition or deletion), but there can be infinite probability values that can be assigned to each edge. Clearly, efficient uncertainty-aware heuristics should be developed to bring the solution to the realm of feasiblity. 
 
@@ -86,8 +103,6 @@ intractability. In uncertain graphs, the problem is even harder since an edge op
 
 %******{\todo{You had in the old version a figure (Fig 2). I deleted this one. It does not add much to the paper and not needed.}}*******
 \vspace{2mm}
-
-
 In this paper, we present a principled extension of graph anonymization techniques in the presentence of uncertainty, called \SysNameNS.
 \SysName preserves as much of the original \emph{uncertain graph} structure as possible, while injecting enough noise to achieve the desired level of privacy.  
 \SysName incorporates edge uncertainties into the core of the  anonymization processing such as evaluations of privacy gain and utility loss. 

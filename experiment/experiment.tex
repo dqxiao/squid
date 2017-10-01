@@ -2,21 +2,25 @@
 \label{sec:exp}
 \begin{figure*}[!htb]
     \centering
+    \vspace{-5pt}
     \includegraphics[width=\linewidth]{exp/exp_rel.jpg}
     \caption{Comparison of anonymization methods in terms of their ability to preserve Reliability.}
-    \label{fig:ex_degree}
+    \label{fig:ex_rel}
+    \vspace{-5pt}
 \end{figure*}
 \begin{figure*}[!htb]
+    \vspace{-5pt}
     \centering
     \includegraphics[width=\linewidth]{exp/exp_degree.jpg}
     \caption{Comparison of anonymization methods in terms of their ability to preserve Average Node Degree.}
     \label{fig:ex_degree}
+    \vspace{-5pt}
 \end{figure*}
 
-In this section, we evaluate how well Chameleon and its variants preserve a graph's structural statistics by comparing its anonymized \emph{uncertain} graphs against the original one in terms of graph metrics. The evaluated methods are Chameleon (RSME), RS(Reliability Sensitive), ME(Maximization Entropy) and Rep-An (Representative Anonymization).
+In this section, we evaluate how well Chameleon and its variants preserve a \emph{uncertain} graph's structural statistics by comparing its anonymized \emph{uncertain} graphs against the original one in terms of graph metrics. The evaluated methods are Chameleon (RSME), RS (Reliability Sensitive), ME (Maximization Entropy) and Rep-An (Representative Anonymization).
 Strong structural similarity (small error) in these results would establish the utility of these anonymized graphs in real research analysis and experiments. 
 
-\subsection{Evaluation Metrics}
+\subsection{Evaluation Methodology}
 
 %-----------------------------------
 %  Compared methods
@@ -47,8 +51,7 @@ Strong structural similarity (small error) in these results would establish the 
 \end{table}
 %-----------------------------------
 
-\textbf{Metrics.}~~Besides reliability, our evaluation includes three classes of graph metrics. 
-One group includes degree-based metrics such as Average Node Degree, Degree Distribution, Maximal Degree. These are basic topological metrics capture how degree distributed among nodes and how nodes with particular degree connect among others. The second group includes node separation metrics such as Average Distance, Graph Diameter. They are used to quantifying the inter-connectivity of the graph. The third group metrics include Clustering Coefficient which measures how close neighbors of a node are to forming cliques.
+\textbf{Metrics.}~~Besides reliability, our evaluation includes three classes of graph metrics. One group includes degree-based metrics such as Average Node Degree, Degree Distribution, Maximal Degree. These are basic topological metrics capture how degree distributed among nodes. The second group includes node separation metrics such as Average Distance, Graph Diameter. They are used to quantifying the inter-connectivity of the graph. The third group metrics include Clustering Coefficient which measures how close neighbors of a node are to forming cliques. 
 
 \textbf{Computation.}~~Since there does not exist the closed formula for graph metrics expect Average Node Degree, the results are approximated by Monte Carlo sampling. Specifically, we create a number of random instances of an uncertain graph, and we compute the expected value of each metric using the average of the sampled graphs. Here, we use 1,000 samples since it has been shown that $1000$ usually suffices to achieve accuracy converge~\cite{Potamias_K_2010,Jin_Distance_2011}. In particular, we use Approximate Neighborhood Function (ANF) \cite{Boldi_Rosa_Vigna_2011}, to approximate shortest path-based statistics. For each metric, we report the ratio of absolute difference against the original one. 
 
@@ -57,33 +60,41 @@ First, we aim to explore the case the desired privacy level requires a small amo
 
 
 \subsection{Results}
-\textbf{Degree-based Metrics.}~~For brevity, we report results for  Average Node Degree. 
-% \emph{Average Node Degree.}~~
-Figure~\ref{fig:ex_degree} compares the average node degrees. For each of the DBLP, BRIGHTKITE and PPI graphs, the average node degrees of Chameleon ($k=100$) output graphs are very close the ones of the original graphs. When we increase the strength of the privacy guarantees, i.e., larger $k$ values of $200$ and $300$, the error of average degree progressively increases. For example, DBLP graph shows a small deviation even for $k=300$. The worst-case average degree deviation is still within 15\% of the original. 
+\textbf{Reliability.}~~Figure~\ref{fig:ex_rel} compares the average reliability discrepancies. The smaller discrepancy, the better the reliability preserving. In all cases, the Chameleon (RSME) performs best, followed by its variants (RS and ME).
 
-On the other hand, BRIGHTKITE and PPI show slightly different behaviors. For large $k$ values, i.e., $k=200$ and $k=300$, the largest error is over 300\% from the original values. We attribute them to the existence of heavy-tailed degree distribution in these two graphs which requires more perturbation. 
+For each of the DBLP, BRIGHTKITE and PPI graphs, the reliability of Chameleon ($k=100$) output graphs are very close the ones of the original graphs. When we increase the strength of the privacy guarantees, i.e., larger $k$ values of $200$ and $300$, the error of average reliability progressively increases. Our experiments show the errors introduced by Chameleon (RSME) only increase slowly as $k$ value increases. Note that RS strategy (less perturbation over ``bridge"-like edges) does provide the beneficial impact on the reliability preserving (as witnessed by the smaller error introduced by RSME v.s. ME).
+
+\textbf{Degree-based Metrics.}~~For brevity, we only report results for  Average Node Degree, as representative of degree-based metrics in Figure~\ref{fig:ex_degree}. For each of the DBLP, BRIGHTKITE and PPI graphs, the average node degrees of Chameleon ($k=100$) output graphs are very close the ones of the original graphs. When we increase the strength of the privacy guarantees, i.e., larger $k$ values of $200$ and $300$, the error of average degree slowly increases. For example, DBLP graph shows a small deviation even for $k=300$. The worst-case average degree deviation introduced by the RSME method is still within 15\% of the original. 
+
+On the other hand, BRIGHTKITE and PPI show slightly different behaviors. For large $k$ values, i.e., $k=200$ and $k=300$, the largest error is over 300\% from the original values. The root of large errors is the existence of heavy-tailed degree distribution (over 4\%) in these two graphs which requires larger amount of noise. 
+
+Among Chameleon variants, RS is clearly outperformed by ME and RSME methods in all datasets. For example.  average degree deviation introduced by RS (1.16) is much larger ones of other variants (0.39 and 0.27) in DBLP dataset. This is encouraging because we can eliminate the bulk of the error by fine-grained control of edge probability alteration.   
+
 \begin{figure*}[!tb]
     \centering
+    \vspace{-5pt}
     \includegraphics[width=\linewidth]{exp/exp_apd.jpg}
     \caption{Comparison of anonymization methods in terms of their ability to preserve Average Distance.}
     \label{fig:ex_apd}
+    \vspace{-5pt}
 \end{figure*}
-% \vspace{-10pt}
+
 \begin{figure*}[!tb]
     \centering
+    \vspace{-5pt}
     \includegraphics[width=\linewidth]{exp/exp_cc.jpg}
     \caption{Comparison of anonymization methods in terms of their ability to preserve Clustering Coefficient.}
+    \vspace{-5pt}
     \label{fig:ex_cc}
 \end{figure*}
-% \vspace{-10pt}
+% \vspace{-5pt}
 
-\textbf{Node Separation Metrics.}~~For brevity, we report only the Average Distance as a representative of the node separation metrics. Figure~\ref{fig:ex_apd} shows the Average Distance (AD) values computed on DBLP, BRIGHTKITE, and PPI graphs compared to the AD values on their anonymized graphs. In this case, all of Chameleon output graphs do a good job of preserving the average distance of the original graphs. 
+\textbf{Node Separation Metrics.}~~For brevity, we report only the Average Distance as a representative of the node separation metrics. Figure~\ref{fig:ex_apd} shows the Average Distance (AD) values computed on DBLP, BRIGHTKITE, and PPI graphs compared to the AD values on their anonymized graphs.  
 
-\textbf{Clustering Coefficient}
+\textbf{Clustering Coefficient}~~In comparison, the error introduced by strengthening privacy (i.e., increasing $k$) is relatively small. As with previous experiments, the BRIGHTKITE graph shows a little different behavior. In this case, all of Chameleon output graphs do a good job of preserving Clustering Coefficient of the original graphs (well below 15\%). It confirms the close relationship between reliability and clustering coefficient.
 
 
-\textbf{Summary.}~~Our experimental evaluation on real-world datasets confirms the initial and driving intuition: the {\SysNameNS} approach which explicitly incorporates edge uncertainty and the possible world semantic in the anonymization process outperforms the benchmark solution Rep-An significantly regarding the uncertain graph utility preservation. The {\SysNameNS} introduces limited impact as a result of adding noise to guarantee privacy. 
-% And, the efficiency of the {\SysNameNS} approach is similar to the one of the  approach. 
+\textbf{Summary.}~~Our experimental evaluation on real-world datasets confirms the initial and driving intuition: the {\SysNameNS} approach which explicitly incorporates edge uncertainty and the possible world semantic in the anonymization process outperforms the benchmark solution Rep-An significantly regarding the uncertain graph utility preservation. The {\SysNameNS} introduces limited impact as a result of adding noise to guarantee privacy.  
 
 Another take-home message is: by using fine-grained and uncertainty-aware perturbation strategies such as reliability sensitive edge selection (RS) and max entropy based edge prob alteration (ME), one can achieve the same desired level of obfuscation with the smaller change on the uncertain graph thus maintaining higher data utility. 
 

@@ -14,18 +14,16 @@ the number of connected pairs $cc(G)$. Then, the count on the original uncertain
 	The complexity of the baseline $\mathcal{E}RR-$eval algorithm is $\mathcal{O} (|E| \cdot  N \alpha(|V|) |E| )$ where $\alpha$ is the inverse Ackermann function.  
 \end{lemma}
 
-
-
 \textsc{Proof.}~~The time complexity of the connected component detection algorithm based on the union-find method is $\mathcal{O}(\alpha(|V|) |E|)$~\cite{Wredman:1989:CPC:73007.73040}. Consequently, computing the $\mathcal{E}RR$ for an edge over the $N$ possible worlds takes time $\mathcal{O}(N \alpha(|V|) |E|)$, and the total time complexity for all the edges is $\mathcal{O} (|E| \cdot  N \alpha(|V|) |E|)$.}
 
 
 \begin{figure}
 	\centering
     \includegraphics[width=1\linewidth]{ill/rrEval.pdf}
-    \vspace{-1em}
+    \vspace{-10pt}
     \caption{\small Reused sampling estimator for $\mathcal{E}RR$ }
     \label{fig:rrEval}
-%     \vspace{-1em}
+    \vspace{-10pt}
 \end{figure}
 
 Obviously, the baseline algorithm is inefficient when the input uncertain graph is very large (it is quadratic in the number of edges). Here, we present a efficient algorithm for $\mathcal{E}RR$ evaluation in Algorithm~\ref{alg:RReval}. Its basic idea is to re-use the connected components detection result of samples as illustrated in~\ref{fig:rrEval}. For each edge $e$, we group the sampled possible worlds according to the edge existence (Line 4-6), then get the sampled average of $cc$ for each group as accurate approximation of $cc(\mathcal{G}_{e})$ and $cc(\mathcal{G}_{\bar{e}})$. By this way, we bring the the evaluation of edge reliability relevance to the realm.  
@@ -34,9 +32,8 @@ Obviously, the baseline algorithm is inefficient when the input uncertain graph 
     The time complexity of Algorithm~\ref{alg:RReval} $\mathcal{E}RR-$val is $\mathcal{O}(N \alpha(|V|) |E|)$ where $N$ is the number of samples.
 \end{lemma}
 
-
 \begin{algorithm}[!tb]
-% {\scriptsize
+{\scriptsize
     \begin{algorithmic}[1]
        \item[] {\textbf{Input:} ~$\mathcal{G}=(V,E,\mathit{p})$, $N$ is the number of sampled graphs;~}
        \item[] {\textbf{Output:} ~$\mathcal{E}RR$ Reliability relevance of edges in $\mathcal{G}$}
@@ -51,5 +48,6 @@ Obviously, the baseline algorithm is inefficient when the input uncertain graph 
          \caption{Edge Reliability Relevance Evaluation}
         \label{alg:RReval}
     \end{algorithmic}
-    % }
+    }
 \end{algorithm}
+% \vspace{-10pt}

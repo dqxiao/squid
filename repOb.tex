@@ -10,7 +10,7 @@ As shown in Figure~\ref{fig:repOB}, we first extract a \emph{single} \emph{repre
     \captionsetup{margin=0cm}
     \centering  
         \includegraphics[width=0.95\columnwidth]{AddFigure/repOB.pdf}
-        \vspace{-0.7em}
+        \vspace{-3pt}
       \caption{Overview of Rep-An. Noise is added to the extracted \emph{representative} instance.}
     \label{fig:repOB}
     \vspace{-0.5em}
@@ -45,10 +45,10 @@ As shown in Figure~\ref{fig:repOB}, we first extract a \emph{single} \emph{repre
        \includegraphics[width=\linewidth]{rep_exp/degree_row.eps}
     \end{minipage}
   }
-    \vspace{-10pt}
+    \vspace{-5pt}
     \caption{Edge probability\& degree distributions.}
     \label{fig:summary_graph}
-   \vspace{-5pt}
+   \vspace{-10pt}
 \end{figure}
 
 
@@ -75,7 +75,7 @@ As shown in Figure~\ref{fig:repOB}, we first extract a \emph{single} \emph{repre
     \vspace{-10pt}
     \caption{The structural distortion introduced for different privacy levels quantifies as the average reliability discrepancy between the original ones and perturbed ones.}
     \label{fig:rep_exp}
-    \vspace{-5pt}
+    \vspace{-15pt}
 \end{figure*}
 
 However, this approach has several limitations. First, the input edge uncertainties (probabilities) are no longer integrated into the anonymization process since they are detached from the graph in the first step. Second, since the two phases are isolated from each other, different phases might be optimized for different metrics. As the result, this benchmark solution Rep-An introduces a high level of noise and consequently deteriorates the overall utility.
