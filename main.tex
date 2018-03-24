@@ -9,9 +9,7 @@
 %
 \documentclass[10pt,conference,letterpaper]{IEEEtran}
 \usepackage{times,amsmath,epsfig}
-
-\usepackage{subfigure}
-\usepackage{color}
+  \usepackage{color}
 \usepackage{balance}  % for  \balance command ON LAST PAGE 
 \usepackage{graphicx}
 \usepackage{epstopdf}  % used for generating pdf 
@@ -36,8 +34,7 @@
 \usepackage{algorithmic}
 \renewcommand{\algorithmiccomment}[1]{\bgroup #1 \egroup}
 
-% to sort cite 
-% \usepackage{multirow} % to use multirow 
+
 
 
 \newcommand{\ie}[0]{\textit{i.e.}}
@@ -88,18 +85,23 @@ Worcester, United States of America\\
 %
 
 \begin{abstract}  
-Research on social and business applications requires open access to real datasets. Such datasets can be shared,  generally in the form of \emph{uncertain graphs} whose edges are labeled with a probability of existence. While releasing uncertain graphs often risks exposing sensitive user information to the public. Unfortunately, current works for privacy preserving graph releasing only target deterministic ones and overlook the inherent uncertainty in edges.
+Many graphs in real-world social and business applications are not deterministic, but are uncertain in nature. 
+Related research requires open access to such uncertain graph datasets. While sharing these datasets often risks exposing 
+sensitive user data to the public. 
+However, current privacy preserving graph releasing works mainly target on deterministic graphs and overlook the uncertain scenario. 
 
-To overcome such limitation, our work seeks a solution to release \emph{uncertain graphs} with high utility while preserving privacy. We show that simply combining the representative extraction strategy and conventional graph anonymization method will result in the addition of noise that significantly disrupts \emph{uncertain graph} structure, making it unsuitable for the further study. Instead, we introduce an uncertainty-aware approach that provides identical privacy guarantees with much less noise. It enables fine-grained control over noise injected the \emph{original} uncertain graph. In particular, we introduce a reliability-based metric for utility loss evaluation, and propose two uncertain-aware schemes including reliability-sensitive edge selection and anonymity-oriented edge alteration. Finally, we apply our approach to real \emph{uncertain} graphs and show that it produces anonymized \emph{uncertain} graphs that closely match the originals in important graph structure metrics. 
+We first show that simply combining the representative extraction strategy and conventional graph anonymization method will result in the addition of noise that significantly disrupts uncertain graph structure. 
+Our work seeks a solution to release uncertain graphs with high utility without compromising user privacy. We introduce an uncertainty-aware method, Chameleon, that provides identical privacy guarantees with much less utility loss. With the possible world semantics, it enables a fine-grained control over the injected noise. Finally, we apply our method to real uncertain graphs and show that it produces sanitized graphs that closely match the original uncertain graphs. 
+% not only the statstics but also real-world applications 
 \end{abstract}
 
 \input{motivation/intro}
 \input{relates.tex}
-\input{notation.tex}
-\input{repOb.tex}
-\input{chamelon.tex}
-\input{experiment/experiment}
-\input{conclusion.tex}
+% \input{notation.tex}
+% \input{repOb.tex}
+% \input{chamelon.tex}
+% \input{experiment/experiment}
+% \input{conclusion.tex}
 \bibliographystyle{abbrvnat}
 % \bibliographystyle{abbrv}
 \bibliography{refs}
