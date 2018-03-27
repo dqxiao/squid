@@ -9,7 +9,9 @@
 %
 \documentclass[10pt,conference,letterpaper]{IEEEtran}
 \usepackage{times,amsmath,epsfig}
-  \usepackage{color}
+
+\usepackage{subfigure}
+\usepackage{color}
 \usepackage{balance}  % for  \balance command ON LAST PAGE 
 \usepackage{graphicx}
 \usepackage{epstopdf}  % used for generating pdf 
@@ -43,9 +45,7 @@
 
 \newcommand{\keobf}{\textit{$(k,\epsilon)$-obfuscation}}
 \newcommand{\argmin}{\operatornamewithlimits{argmin}}
-\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
-\newcommand{\repAn}[0]{\textnormal{Rep-An}}
-\newcommand{\funcname}[0]{\textit{GenAnonymization}}
+
 
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem} 
@@ -90,7 +90,8 @@ Related research requires open access to such uncertain graph datasets. While sh
 sensitive user data to the public. 
 However, current privacy preserving graph releasing works mainly target on deterministic graphs and overlook the uncertain scenario. 
 
-We first show that simply combining the representative extraction strategy and conventional graph anonymization method will result in the addition of noise that significantly disrupts uncertain graph structure. 
+% We first show that simply combining the representative extraction strategy and conventional graph anonymization method will result in the addition of noise that significantly disrupts uncertain graph structure. 
+We first show the conventional methods tailored towards deterministic graphs, significantly disrupts the structure of uncertain graph because of the disregarding the possible world semantic of uncertain graphs. 
 Our work seeks a solution to release uncertain graphs with high utility without compromising user privacy. We introduce an uncertainty-aware method, Chameleon, that provides identical privacy guarantees with much less utility loss. With the possible world semantics, it enables a fine-grained control over the injected noise. Finally, we apply our method to real uncertain graphs and show that it produces sanitized graphs that closely match the original uncertain graphs. 
 % not only the statstics but also real-world applications 
 \end{abstract}
