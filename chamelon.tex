@@ -1,54 +1,17 @@
-\section{Privacy Via Chameleon}
+\section{Privacy Via XXX}
 \label{sec:tech}
-The results in the previous section demonstrate the huge utility loss in the perturbed output after adding noise to the extracted representative instance to guarantee privacy. In this section, we propose a novel uncertainty-aware algorithm called Chameleon. Chameleon enables unifying and grained control over the noise injected into the \emph{original uncertain} graph. This qualifies Chameleon to provide enough privacy guarantee in better utility. 
+Instead of detaching edge uncertainty from the anonymization phase, we shift the state-of-art method by integrating uncertainty semantics into its core steps, namely XXX.
+It enables a unifying and grained control over the noise injected to uncertain graphs, then provides enough privacy guarantee with good utility.
 
-\subsection{The Chameleon framework}
+\subsection{The State-of-Art Framework}
+\textbf{Problem Transformation}~~Anonymization is done via altering the probabilities of sampled edges. For each sampled edge $e$, it is assigned a probability deviation $r_{e}$, where $r_{e} \leftarrow R(\sigma)$. As shown in the work~\cite{Boldi_Injecting_2012}, the distribution $R(\sigma)$ is a truncated normal distribution with mean 0 and variance $\sigma^2$. But, it could in principle be any distribution. 
+
+As the standard deviation $\sigma$ decreases, a greater mass of $R_{\sigma}$ will concentrate near $r_{e}=0$, then the amount of injected noise and consequent structural deviation will be smaller. It enables transforming the graph anonymization problem into the minimization of structural noise need. The later one can be achieved via a binary search on the value of standard deviation $\sigma$.
 \input{mainRoutine.tex}
-\textbf{Contribution.}~~The conventional schemes are plausible if the operating edge probability is binary, which is unreasonable when dealing with uncertain graphs. Our goal is to develop a anonymization mechanism that reduced the amount of noise that must be added to achieve a given privacy level for \emph{uncertain} graphs. Our insight is to shift an existing framework by integrating uncertainty semantics into its core steps.
 
-We now introduce the state-of-art perturbation algorithm~\cite{Boldi_Injecting_2012} that computes the noise needed to injected into the input \emph{determinitic} graph to obtain the desired privacy level. Each selected edge is altered based on a stochastic variable drawn from a trunated normal distribution, $R(\sigma)$. This distribution has density function proportional to the normal distribution, with mean $0$ and variance $\sigma^2$. Thus, small values of $\sigma$ contribute towards better utility, but at the same time they provide lower level of obfuscation. Targeting for high utility, the algorithm aims at injecting the minmal amount of noise need to achieve the required obfuscation. Its computation is achieved via a binary search on the value of the noise parameter $\sigma$, as shown in Algorithm~\ref{alg:Skeleton}. 
-
-The binary search flow is determined by the \texttt{GenObf} function. 
-The function \texttt{GenObf} aims at finding a {\keobf} using a given noise parameter $\sigma$.
-It returns a pair $\langle \tilde{\epsilon}, \tilde{\mathcal{G}} \rangle$, where $\tilde{\epsilon} =1$ or $\tilde{\epsilon} \le \epsilon$. In the first case, all the attempts fail. In the latter cases, $\tilde{\mathcal{G}}$ is a {\keobf}. 
-The function \texttt{GenObf} finds obfuscation candidate in a randomized way, $t$ attempts are performed. Each attempt performs following core steps:
-\begin{itemize}
-    \item{Select a subset of edges subjects to further alteration;}
-    \item{Alter selected edges as the computed amount of noise;}
-    \item{Check the solution with/out enough privacy guarantee;}
-\end{itemize}
-In the following sections, we introduce how to integrate \emph{uncertainty} in edge selection \& alteration. 
+\textbf{Search Flow}~~The binary search flow is determined by the \textmd{GenObf} function. For a given value of standard deviation $\sigma$, \textmd{GenObf} either returns the best found {\keobf} instance or indicates failure. 
+The binary-search process starts with an initial guess of an upper bound $\sigma_{u}$ which is iteratively doubled until a ${\keobf}$ graph is found. Then, it is performed using $\sigma_{l}$ = 0 as the lower bound, and the found upper bound $\sigma_{u}$. The binary search terminates when the search interval is sufficiently short. It outputs the best {\keobf} found (i.e., the
+ last one that was successfully generated).
 
 
-\subsection{Uncertainty-aware Edge Selection}
-The first challenge is to find out the optimal subset of edges that balances privacy gain and utility loss for further alteration. 
-It is a typical combinational optimization problem which involves the consideration over the exponential number of edge combinations. Let alone the infinite possibilities of probability values on the selected edges, which further complicates the problem.
-
-To alleviate combinational intractability, heuristics have been proposed in the context of deterministic graphs. 
-They can be classified into two main categories: 
-(1)~{\em Anonymity-oriented} heuristics that suggest calibrating the applied noise according to the ``uniqueness". To ``blend" unique nodes into crowds, a larger amount of noise is necessary. ~\cite{Boldi_Injecting_2012,Liu_Towards_2008, Thompson_The_2009,Zhou_Preserving_2008}, and 
-(2)~{\em Utility-oriented} heuristics that suggest calibrating the applied noise according to the ``relevance". To preserve graph structure, avoiding large perturbation over ``important" edges~\cite{casasprivacy,Ying_Randomizing_2008,Liu_Privacy_2009,Ninggal_Utility_2015}.
-Note that, these two types are complementary to each other. Their combination would introduce a cumulative benefit, which has been confirmed in the deterministic graph anonymization practice~\cite{casasprivacy}. 
-
-\textbf{Contribution.}~~Nevertheless, these two types of heuristics and their combination have not been explored yet in the context of \emph{uncertain} graphs.
-In this work, we first extend the idea of \emph{uniqueness} score via a density estimation method. Second, we propose a novel edge relevance that extends well-known graph concepts, such as ``cut edge" for estimating structural errors incurred by edge probability alterations. We design a sampling-based algorithm to compute edge relevance in \emph{uncertain} graphs. Finally, we show how to utilize these \emph{uncertainty}-embedded meta-heuristics to effectively select edges for further alteration. 
-
-\subsection{Uniqueness Score}
-Intutively, larger amount of noise should be added at nodes that are less anonymized (i.e, more distinctive) in the original graphs. Thus, we are left asking the question, how to measure the typical level of a given node among the nodes of the original \emph{uncertain} graph. \emph{Uniqueness score} is shown to be an effective metric in the context of deterministic graphs~\cite{Boldi_Injecting_2012}. The formal defintion of uniqueness score is given as follows. 
-\begin{definition}
-    \textbf{Uniqueness Score~\cite{Boldi_Injecting_2012}}
-     Let $P:V \rightarrow  \Omega_{P}$ be a property on the set of nodes $V$ of the graph $\mathcal{G}$, let $d$ be a distance function on $\Omega_{P}$, and let $\theta >0$  be a parameter. 
-  Then the $\theta-commonness$ of the property values $\omega \in \Omega_{P}$ is $C_{\theta}(\omega):= \sum_{u \in V} \Phi_{0,\theta}(d(\omega, P(v)))$,   
-while the $\theta$-uniqueness of $\omega \in \Omega_{P}$ is $U_{\theta}:= \frac{1}{C_{\theta}(\omega)}$. 
-\end{definition} 
-
-Note that, it adopts a parametric way to estimate the probability density function of the property value $\omega$ (i.e., how typical the value is among all the nodes). It place a smooth kernel function $Phi$ with standard variance $\theta$, where $\theta$ implies the spread out of the property value over the domain.
-In the previous work~\cite{Boldi_Injecting_2012}, they set $\theta=\sigma$, where $\sigma$ is the standard deviation of the noise generation Gaussian distribution since the larger injected amount of uncertainties indicates that the property values may be spread out in a larger domain. 
-
-In this work, we set $\theta$ equals $\sigma_{\mathcal{G}}$ as the latter represents the spread of property value in the \emph{uncertain graph}. For a given node with the property $\omega$, we can compute its ``uniqueness" score as the reverse of its density. The higher the uniqueness score the less-protected the node and the more anonymization it eventually needs.
-
-\input{relevance.tex}
-\input{relevanceEvaluation.tex}
-\input{genObf.tex}
-\input{edgeProbAlter.tex}
 

@@ -1,8 +1,8 @@
 \begin{algorithm}
 % {\scriptsize
 	\begin{algorithmic}[1]
-    	\item[] {\textbf{Input:}~Uncertain graph $\mathcal{G}$, adversary knowledge $\mathcal{K}$, obfuscation level $k$, tolerance level $\epsilon$, size multiplier $c$ and white noise level $q$ }
-        \item[] {\textbf{Output:}~The anonymized result $\tilde{\mathcal{G}}_{obf}$}
+    	\item[] {\textbf{Input:}~Uncertain graph $\mathcal{G}$, adversary knowledge $\mathcal{K}$, obfuscation level $k$, tolerance level $\epsilon$}
+        \item[] {\textbf{Output:}~The result $\tilde{\mathcal{G}}_{obf}$}
      	\STATE {$\sigma_{l} \leftarrow 0$; $\sigma_{u} \leftarrow 1$} \\
         \REPEAT
         \STATE{$\langle \tilde{\epsilon}, \tilde{\mathcal{G}} \rangle$ $\leftarrow$ \texttt{GenObf}($\mathcal{G},k,\epsilon,c,q,\sigma_{u}, \mathcal{K}$)} \\
@@ -16,7 +16,7 @@
         \UNTIL{$\sigma_{u}-\sigma_{l}$ is enough small}
         % \COMMENT{\textcolor{blue}{\scriptsize Binary search for better obfuscation}}
         \STATE {return $\tilde{\mathcal{G}}_{obf}$}
-    	\caption{\SysName Iterative Skeleton}
+    	\caption{\methodName~Iterative Skeleton}
 	 \label{alg:Skeleton}
     \end{algorithmic}
     % }

@@ -54,11 +54,11 @@
 \newtheorem{example}{Example}
 \newtheorem{lemma}{Lemma}
 
-\newcommand{\SysName}{Chameleon }
-\newcommand{\SysNameNS}{Chameleon}
+\newcommand{\methodName}{Squid}
+
 
 %
-\title{Sharing Uncertain Graphs Using Syntactic Private Graph Models}
+\title{Sharing Uncertain Graphs with Syntactic Anonymity}
 
 % \author{Dongqing Xiao,  Mohamed Y. Eltabakh, Xiangnan Kong \\ 
 % \affaddr{Worcester Polytechnic Institute (WPI), Computer Science Department, MA, USA} \\
@@ -91,16 +91,17 @@ sensitive user data to the public.
 However, current privacy preserving graph releasing works mainly target on deterministic graphs and overlook the uncertain scenario. 
 
 % We first show that simply combining the representative extraction strategy and conventional graph anonymization method will result in the addition of noise that significantly disrupts uncertain graph structure. 
-We first show the conventional methods tailored towards deterministic graphs, significantly disrupts the structure of uncertain graph because of the disregarding the possible world semantic of uncertain graphs. 
-Our work seeks a solution to release uncertain graphs with high utility without compromising user privacy. We introduce an uncertainty-aware method, Chameleon, that provides identical privacy guarantees with much less utility loss. With the possible world semantics, it enables a fine-grained control over the injected noise. Finally, we apply our method to real uncertain graphs and show that it produces sanitized graphs that closely match the original uncertain graphs. 
+We first show conventional methods tailored towards deterministic graphs are not applicable. 
+They significantly disrupt the structure of uncertain graph because of the disregarding the possible world semantic of uncertain graphs. 
+Our work seeks a solution to release uncertain graphs with high utility without compromising user privacy. We introduce an uncertainty-aware method that provides enough privacy guarantee with much less utility loss. With the possible world semantics, it enables a fine-grained control over the injected noise. Finally, we apply our method to real uncertain graphs and show that it produces sanitized graphs that closely match the original uncertain graphs. 
 % not only the statstics but also real-world applications 
 \end{abstract}
 
 \input{motivation/intro}
 \input{relates.tex}
-% \input{notation.tex}
+\input{notation.tex}
 % \input{repOb.tex}
-% \input{chamelon.tex}
+\input{chamelon.tex}
 % \input{experiment/experiment}
 % \input{conclusion.tex}
 \bibliographystyle{abbrvnat}
