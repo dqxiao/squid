@@ -1,17 +1,14 @@
-\section{Privacy Via XXX}
-\label{sec:tech}
-Instead of detaching edge uncertainty from the anonymization phase, we shift the state-of-art method by integrating uncertainty semantics into its core steps, namely XXX.
-It enables a unifying and grained control over the noise injected to uncertain graphs, then provides enough privacy guarantee with good utility.
+\section{Privacy Via {\methodName}}
 
-\subsection{The State-of-Art Framework}
-\textbf{Problem Transformation}~~Anonymization is done via altering the probabilities of sampled edges. For each sampled edge $e$, it is assigned a probability deviation $r_{e}$, where $r_{e} \leftarrow R(\sigma)$. As shown in the work~\cite{Boldi_Injecting_2012}, the distribution $R(\sigma)$ is a truncated normal distribution with mean 0 and variance $\sigma^2$. But, it could in principle be any distribution. 
+We propose a approach for the \textsc{Uncertain graph anonymization} problem. Instead of casting/disregarding uncertainty, we seamlessly integrate possible world semantics into core of the state-of-art anonymization algorithm. It enables grained control over noise subject to uncertain graphs, then provides privacy guarantee while maintaining data utility. 
 
-As the standard deviation $\sigma$ decreases, a greater mass of $R_{\sigma}$ will concentrate near $r_{e}=0$, then the amount of injected noise and consequent structural deviation will be smaller. It enables transforming the graph anonymization problem into the minimization of structural noise need. The later one can be achieved via a binary search on the value of standard deviation $\sigma$.
-\input{mainRoutine.tex}
+\subsection{The State-of-Art Approach}
+We first introduce the state-of-art approach for \textsc{Graph Anonymization} and show its limitations. 
 
-\textbf{Search Flow}~~The binary search flow is determined by the \textmd{GenObf} function. For a given value of standard deviation $\sigma$, \textmd{GenObf} either returns the best found {\keobf} instance or indicates failure. 
-The binary-search process starts with an initial guess of an upper bound $\sigma_{u}$ which is iteratively doubled until a ${\keobf}$ graph is found. Then, it is performed using $\sigma_{l}$ = 0 as the lower bound, and the found upper bound $\sigma_{u}$. The binary search terminates when the search interval is sufficiently short. It outputs the best {\keobf} found (i.e., the
- last one that was successfully generated).
+\textbf{Anonymization}~~The approach obfuscates graph data by adding or removing a subset of edges \emph{partially}. For each edge $e$, it is assigned a probability deviation $r_{e}$, where $r_{e} \leftarrow R(\sigma)$. Boldi {\etal} suggest the distribution $R(\sigma)$ is a truncated normal distribution with mean 0 and variance $\sigma^2$~\cite{Boldi_Injecting_2012}. But, it could in principle be any distribution. 
+
+As the standard deviation $\sigma$ decreases, a greater mass of $R_{\sigma}$ will concentrate near $r_{e}=0$, then the amount of injected noise and consequent structural distortion  will be smaller. Targeting at high utility, this approach aims at injecting the minimal amount of uncertainty need to achieve the required obfuscation. They show its computation can achieved via a binary search on the value of standard deviation $\sigma$, as outline in Algorithm~\ref{}. 
+
 
 
 
