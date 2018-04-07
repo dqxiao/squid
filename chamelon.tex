@@ -1,13 +1,16 @@
 \section{Privacy Via {\methodName}}
 
-We propose a approach for the \textsc{Uncertain graph anonymization} problem. Instead of casting/disregarding uncertainty, we seamlessly integrate possible world semantics into core of the state-of-art anonymization algorithm. It enables grained control over noise subject to uncertain graphs, then provides privacy guarantee while maintaining data utility. 
+We propose a approach for the \textsc{Uncertain graph anonymization} problem. Instead of casting/disregarding uncertainty, we seamlessly integrate possible world semantics into the core of the state-of-art anonymization algorithm. It enables grained and judicious control over noise subject to uncertain graphs, then provides privacy guarantee while maintaining data utility. 
 
-\subsection{The State-of-Art Approach}
-We first introduce the state-of-art approach for \textsc{Graph Anonymization} and show its limitations. 
 
-\textbf{Anonymization}~~The approach obfuscates graph data by adding or removing a subset of edges \emph{partially}. For each edge $e$, it is assigned a probability deviation $r_{e}$, where $r_{e} \leftarrow R(\sigma)$. Boldi {\etal} suggest the distribution $R(\sigma)$ is a truncated normal distribution with mean 0 and variance $\sigma^2$~\cite{Boldi_Injecting_2012}. But, it could in principle be any distribution. 
 
-As the standard deviation $\sigma$ decreases, a greater mass of $R_{\sigma}$ will concentrate near $r_{e}=0$, then the amount of injected noise and consequent structural distortion  will be smaller. Targeting at high utility, this approach aims at injecting the minimal amount of uncertainty need to achieve the required obfuscation. They show its computation can achieved via a binary search on the value of standard deviation $\sigma$, as outline in Algorithm~\ref{}. 
+
+ 
+
+
+
+
+
 
 
 
