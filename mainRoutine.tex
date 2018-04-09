@@ -5,14 +5,14 @@
         \item[] {\textbf{Output:}~The result $\mathcal{G}_{obf}$}
      	\STATE {$\sigma_{l} \leftarrow 0$; $\sigma_{u} \leftarrow 1$} \\
         \REPEAT
-        \STATE{$\langle \hat{\epsilon}, \hat{\mathcal{G}} \rangle$ $\leftarrow$ \texttt{GenObf}(...,$\sigma_{u}$)} \\
+        \STATE{$\langle \hat{\epsilon}, \hat{\mathcal{G}} \rangle$ $\leftarrow$ \textbf{genObf}(-,$\sigma_{u}$)} \\
         \STATE{{\bf if} $\hat{\epsilon}=1$ (fail) {\bf then} $\sigma_{l} \leftarrow \sigma_{u}$; $\sigma_{u} \leftarrow 2\sigma_{u}$}
         \UNTIL{$\hat{\epsilon} \neq 1 $} \\
         \REPEAT
         	\STATE {$\sigma_{mid} \leftarrow (\sigma_{u}+\sigma_{l})/2$}
-            \STATE {$\langle \hat{\epsilon}, \hat{\mathcal{G}} \rangle \leftarrow \texttt{GenObf}(..., \sigma_{mid})$}
-            \STATE {{\bf if} $\hat{\epsilon} =1$~{\bf then}~$\sigma_{l} \leftarrow \sigma_{mid}$}
-            \STATE {{\bf else} $\sigma_{u} \leftarrow \sigma_{mid};~~{\mathcal{G}}_{obf} \leftarrow \hat{\mathcal{G}}$}
+            \STATE{$\langle \hat{\epsilon}, \hat{\mathcal{G}} \rangle$ $\leftarrow$ \textbf{genObf}(-,$\sigma_{mid}$)}
+            \STATE {{\bf if} $\hat{\epsilon} =1$~{\bf then}~$\sigma_{l} \leftarrow \sigma_{mid}$}\\
+            \STATE {{\bf else} $\sigma_{u} \leftarrow \sigma_{mid}$;~~{$\mathcal{G}}_{obf} \leftarrow \hat{\mathcal{G}}$}
         \UNTIL{$\sigma_{u}-\sigma_{l}$ is enough small}
         % \COMMENT{\textcolor{blue}{\scriptsize Binary search for better obfuscation}}
         \STATE {return $\mathcal{G}_{obf}$}
@@ -21,4 +21,4 @@
     \end{algorithmic}
     }
 \end{algorithm}
-\vspace{-5pt}
+\vspace{-7pt}

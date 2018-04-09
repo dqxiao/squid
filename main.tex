@@ -42,6 +42,8 @@
 \newcommand{\ie}[0]{\textit{i.e.}}
 \newcommand{\eg}[0]{\textit{e.g.}}
 \newcommand{\etal}[0]{\textit{et al.}}
+% \newcommand{\omit}
+
 
 \newcommand{\keobf}{\textit{$(k,\epsilon)$-obf}}
 \newcommand{\argmin}{\operatornamewithlimits{argmin}}
@@ -57,8 +59,10 @@
 
 \newcommand{\methodName}{Squid}
 
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=2.5mm}
 
-%
+
 \title{Sharing Uncertain Graphs with Syntactic Anonymity}
 
 % \author{Dongqing Xiao,  Mohamed Y. Eltabakh, Xiangnan Kong \\ 
@@ -102,8 +106,8 @@ Our work seeks a solution to release uncertain graphs with high utility without 
 \input{relates.tex}
 \input{notation.tex}
 \input{state_of_art.tex}
-\input{chamelon.tex}
-% \input{experiment/experiment}
+\input{squid.tex}
+\input{squid_ex/exp.tex}
 \input{conclusion.tex}
 \bibliographystyle{abbrvnat}
 % \bibliographystyle{abbrv}

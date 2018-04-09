@@ -1,16 +1,33 @@
 \section{The State-of-Art Approach}
 As ever explained in Section~\ref{sec:Intro}, either the miscasting or detachment of edge probabilities lead to poor results. Thus, we can not apply existing graph anonymization methods to the uncertain ones directly. 
-Thus we are left asking the question, how to generalize existing methods to the probabilistic context?
-In this section, we first introduce the state-of-art approach and show its limitations in the uncertain scenario.  
+Thus we are left asking the question, \emph{how to generalize existing methods to the probabilistic context?}
+In this section, we first introduce the state-of-art approach~\cite{Boldi_Injecting_2012} and show its limitations in the uncertain scenario.  
 
-\subsection{Overview}~~In general, it obfuscates graph data by adding or removing edges\emph{partially}. For each edge $e$, it assigns a probability deviation $r_{e}$, where $r_{e} \leftarrow R(\sigma)$. For the generating distribution $R_{\sigma}$, Boldi {\etal} suggest~\cite{Boldi_Injecting_2012} the use of the truncated normal distribution with mean 0 and variance $\sigma^2$. While, it could in principle be any distribution. As the standard deviation $\sigma$ decreases, a greater mass of $R_{\sigma}$ will concentrate near $r_{e}=0$.  Then, the amount of injected noise and consequent structural distortion  will be smaller. Targeting at the high utility, the approach aims at injecting the minimal amount of uncertainty need to achieve the required obfuscation. 
+\subsection{Overview}~~In general, it obfuscates graph data $G=(V,E)$ by adding or removing edges\emph{partially}. For each edge $e$, it assigns a probability deviation $r_{e}$, where $r_{e} \leftarrow R(\sigma)$. In specific, the uncertainty injecting scheme proceeds as follows:
+\begin{equation}
+	p(e) =
+	\begin{cases}
+		 1-r_{e}  & e \in E \\
+		 r_{e}    & otherwise 
+	\end{cases}
+	\label{eq:inject}
+\end{equation}
+
+For the generating distribution $R_{\sigma}$, Boldi {\etal}~\cite{Boldi_Injecting_2012} suggest the use of the truncated normal distribution with mean 0 and variance $\sigma^2$. While, it could in principle be any distribution. As the standard deviation $\sigma$ decreases, a greater mass of $R_{\sigma}$ will concentrate near $r_{e}=0$.  Then, the amount of injected noise and consequent structural distortion  will be smaller. Targeting at the high utility, the approach aims at injecting the minimal amount of uncertainty need to achieve the required obfuscation. 
 
 \input{mainRoutine.tex}
 
-Computing the minimal amount of uncertainty is achieved via a binary search on the value of standard deviation $\sigma$, as outlined in Algorithm~\ref{alg:obf}. The search flow is determined by the function {\genobf}. The function either returns the found {\keobf} instance using a given parameter $\sigma$ or failure signals. The obfuscation algorithm starts with an initial guess of an upper bound $\sigma_{u}$, which is iterative doubled until a {\keobf} instance is found. Then, the binary search is performed over the range $[0,\sigma_{u}]$. The binary search terminates until the search interval is sufficiently short. The algorithm outputs the best {\keobf} found (the last one that was successfully generated).
+Computing the minimal amount of uncertainty is achieved via a binary search on the value of standard deviation $\sigma$. As outlined in Algorithm~\ref{alg:obf}, the search flow is determined by the function {\genobf}. The function {\genobf} either returns the found {\keobf} instance using a given standard deviation parameter $\sigma$ or failure signals. The search starts with an initial guess of an upper bound $\sigma_{u}$, which is iterative doubled until a {\keobf} instance is found. Then, the binary search is performed over the range $[0,\sigma_{u}]$. The binary search terminates until the search interval is sufficiently short. The algorithm outputs the best {\keobf} found (the last one that was successfully generated).
+
+\subsection{The function {\genobf}}~~
+In reality, finding {\keobf} instances is not that easy. The function {\genobf} utilizes randomized search to find {\keobf} instances using a given parameter $\sigma$. Multiple  attempts are performed (In our experiment, 5 attempts are performed.). Iff all the attempts fail, {\genobf} returns failure signals, otherwise, returns the {\keobf} instance. 
+
+Each attempt begins by selecting a subset of edges, which will be subjected to alteration. Then, it distribute the deviation among selected edges and alter their edge probabilities. In particular, they suggest to calibrate the perturbation applied to an edge $e$ according to the ``uniqueness" of the two nodes $u$ and $v$. The calculation of uniqueness is covered in a sequent section. In brief, if both $u$ and $v$ are common nodes w.r.t the property, then $r_{e}$ should be very small; on the other hand, if $u$ and $v$ are outliers, then $r_{e}$ should be higher. 
+
+\subsection{Limitations} 
+In the context of deterministic graph anonymization, the above-mentioned approach achieve the desirable level of obfuscation with small change in the data, thus maintaining high utility. 
+However, the design heavily tailored towards the deterministic context. In the uncertain scenario, it suffers from following issues. First, its scheme assumes the existence of edges is known with certainty, thus fails to handle uncertain graphs where the existence of edges is probabilistic. All the operators, such as selection and alteration, need to be integrated with possible world semantics carefully.  
+Second, its scheme does not consider the structural relevance of edges in critical edge selection/alteration steps, which leads to unnecessary structural distortion.
 
 
-\subsection{The function {\genobf}}~~Randomized search is utilized to find {\keobf} instances using a given parameter $\sigma$, and multiple  attempts are performed (In our experiment, 5 attempts are performed.).  In particular, they suggest to calibrate the perturbation applied to an edge $e$ according to the ``uniqueness" of the two nodes $u$ and $v$. The calculation of uniqueness is covered in a sequent section. In brief, if both $u$ and $v$ are common nodes w.r.t the property, then $r_{e}$ should be very small; on the other hand, if $u$ and $v$ are outliers, then $r_{e}$ should be higher. 
-
-\subsection{Summary} 
 
