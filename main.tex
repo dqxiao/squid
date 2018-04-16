@@ -90,15 +90,9 @@ Worcester, United States of America\\
 %
 
 \begin{abstract}  
-Many graphs in real-world social and business applications are not deterministic, but are uncertain in nature. 
-Related research requires open access to such uncertain graph datasets. While sharing these datasets often risks exposing 
-sensitive user data to the public. 
-However, current privacy preserving graph releasing works mainly target on deterministic graphs and overlook the uncertain scenario. 
+Many graphs in real-world  applications are not deterministic, but are uncertain in nature. Related research requires open access to such uncertain graph datasets. While sharing these datasets often risks exposing sensitive data to the public. Yet, current works mainly concern about the privacy issue with deterministic graph sharing.  The uncertain scenario is overlooked. 
 
-% We first show that simply combining the representative extraction strategy and conventional graph anonymization method will result in the addition of noise that significantly disrupts uncertain graph structure. 
-We first show conventional methods tailored towards deterministic graphs are not applicable. 
-They significantly disrupt the structure of uncertain graph because of the disregarding the possible world semantic of uncertain graphs. 
-Our work seeks a solution to release uncertain graphs with high utility without compromising user privacy. We introduce an uncertainty-aware method that provides enough privacy guarantee with much less utility loss. With the possible world semantics, it enables a fine-grained control over the injected noise. Finally, we apply our method to real uncertain graphs and show that it produces sanitized graphs that closely match the original uncertain graphs. 
+We first show conventional methods are not applicable for uncertain graph sharing. By disregarding the possible world semantic, they significantly disrupt the stochastic structure. Our work seeks a solution to share meaningful uncertain graphs without compromising user privacy. We develop an syntactically private algorithm, Squid, for solving this problem. It integrates the possible world semantic into the core of anonymization. It enables a fine-grained, uncertainty-aware control over the injected noise. We apply our method to real uncertain graphs and show its efficiency and practical utility. 
 % not only the statstics but also real-world applications 
 \end{abstract}
 
