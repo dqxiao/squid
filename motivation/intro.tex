@@ -3,7 +3,8 @@
 \label{sec:Intro}
 
 % Graph-- Uncertain Graph--Examples 
-In emerging applications, such as business to business (B2B) and social networks,  graphs are used to capture the complex relationships inherent. Sometimes, the existence of the relationship between two entities is uncertain. For instance, in social networks, nodes represents individual users, while edges represent friendship or trust link among them.  Usually, the link is derived by inference and prediction models built on interaction details~\cite{Lin_B2B,Adar_Managing_2007,Kempe_Maximizing_2003}, and edge probability denotes the accuracy of a link prediction, or the trust of one person on another. 
+Graphs are used to capture the complex relationships in emerging applications, such as business to business (B2B) and social networks. 
+Sometimes, the existence of the relationship between two entities is uncertain. For instance, in social networks, nodes represents individual users, while edges represent friendship or trust link among them.  Usually, the link is derived by inference and prediction models built on interaction details~\cite{Lin_B2B,Adar_Managing_2007,Kempe_Maximizing_2003}. And, edge probability denotes the accuracy of a link prediction, or the trust of one person on another. 
 In these applications, the data can be modeled and shared as uncertain graphs whose edges carries a probability of existence. The probability represents the confidence that the relationship holds in reality. 
 
 \begin{figure}[!htb]
@@ -27,7 +28,8 @@ In these applications, the data can be modeled and shared as uncertain graphs wh
 \end{figure} 
 
 % Sharing--Privacy--Examples 
-These uncertain graphs are invaluable for scientific research and commercial applications~\cite{Kempe_Maximizing_2003,Cho_Friendship_2011}. However, sharing these uncertain graphs would violate the privacy of users or entities profiled inside. For example, in social trust network, the trust relationships among users---which  greatly impact users' behaviors, are usually probabilistic.  They are useful in social interaction study, micro targeting. While, users are unwilling to share such confidential information with potential adversaries like Cambridge Analytica. In B2B networks, business operators also hesitate to share transaction patterns for the purpose of protecting their confidential business models. It is arising the question about sharing uncertain graphs without compromising privacy. 
+These uncertain graphs are invaluable for scientific research and commercial applications~\cite{Kempe_Maximizing_2003,Cho_Friendship_2011}. However, sharing these uncertain graphs would violate the privacy of users or entities profiled inside. In social trust network, the trust relationships among users--- which greatly impact users' behaviors, are usually probabilistic.  They are useful in social interaction study and micro-targeting. While users are unwilling to share such confidential information with potential adversaries like Cambridge Analytica. In B2B networks, business operators also hesitate to share transaction patterns as it relates to  confidential business models. Such tension is raising the question of sharing uncertain graphs without compromising privacy. 
+
 
 % State-of-Art 
 A number of privacy preserving graph sharing schemes have been studied in the deterministic scenario~\cite{Liu_Towards_2008,Ying_Randomizing_2008,Wang2011,Liu_Privacy_2009,Nguyen_Anonymizing_2015,Sala_Sharing_2011,Xiao_Differentially_2014,lee2011}, though many problems about sharing uncertain graphs still remain unexplored.
@@ -38,16 +40,40 @@ Hence, the weighted graph anonymization scheme could produce very poor result in
 
 
 % Rep-OB 
-In previous work~\cite{Xiao:2018}, we ever present another option (Rep-An) which replaces the given uncertain graph with its single representative instance. It enables the use of existing graph anonymization methods in the uncertain scenario, regardless of the uncertainty.  Yet, this approach is shown to be problematic. The detachment of probabilities in the first step deteriorates the data utility. 
+In previous work~\cite{Xiao:2018}, we ever present another option, Rep-An. 
+It first extracts a single deterministic representative
+instance $G$ that capture structural properties of the uncertain
+graph.
+After that, anonymization can be then be proceed efficiently on $G$ using conventional algorithms, regardless of the uncertainty.  
+However, Rep-An is is not always feasible. The detachment of edge uncertainty deteriorates the data utility. 
 
-As ever mentioned, either the casting or detachment of edge probabilities lead to poor results. Existing graph anonymization schemes are inadequate to share uncertain graph with desirable trade-off between privacy and utility. 
-In contrast, our work seeks a solution tailored towards uncertain graphs via incorporating possible world semantics. We develop {\methodName} on the basis of syntactic private notation. {\methodName} preserves as much the stochastic nature of the original uncertain graph as possible, while injecting enough structural noise to guarantee a chosen level of privacy against re-identification attacks. To achieve above goals, we carefully addressed following issues. 
 
-$\bullet$~\textup{\emph{Stochastic Privacy Attacks.}}~~In the uncertain graph model, edge uncertainty plays an indispensable role. It is impractical to discard them in the release.  
-While, the extra release of edge uncertainty makes privacy protection far more difficult as it  empowers the adversary and make the profiled entity more vulnerable. To this end, we show the potential re-identification attack and present the corresponding solution. 
+As ever mentioned, either the casting or detachment of edge probabilities lead to poor results. Existing graph anonymization schemes are inadequate to share uncertain graphs with desirable trade-off between privacy and utility. 
+There are the following distinct challenges in the uncertain scenario. 
 
-$\bullet$~\textup{\emph{Stochastic Utility Loss Metric.}}~~It is very challenging to maintain the graph structure when the uncertain graph is modified to pursue anonymity. The utility loss incurred by the distortion is evaluated according to metrics. Unfortunately, existing graph utility loss metrics such as graph edit distance~\cite{Liu_Towards_2008}, spectrum discrepancy~\cite{Ying_Randomizing_2008}, community reconstruction error~\cite{Wang2011} and shortest path discrepancy~\cite{Liu_Privacy_2009} are not suitable in the uncertain scenario because of the ignorance of edge probability. In this context, the discrepancy w.r.t standard uncertain graph reliability become a good criterion. It evaluates the connectivity difference in the context of the entire graph and meanwhile utilizes the possible world model. 
+$\bullet$~\textup{\emph{Stochastic Privacy Attacks.}}~~Edge uncertainty plays an indispensable role in the uncertain graph model. It is impractical to discard them in the release.  
+While the extra release of edge uncertainty makes privacy protection far more difficult as it empowers the adversary and makes the profiled entity more vulnerable. 
+% To this end, we show the potential re-identification attack and present the corresponding solution. 
 
-$\bullet$~\textup{\emph{Intractable Search Space.}}~~It is very challenging to find a sanitized graph with the desired level of privacy by as few graph contractions as possible. In the deterministic scenario, it is NP-hard with edge addition and edge deletion operations\cite{Hartung_Theory_2015}. In the uncertain scenario, the edge modification is no longer a binary operation (addition/deletion), but can be infinite probability values. Exhaustive search is computationally intractable if the number of edges is large. Thus, we approximate the problem of interest via a randomized algorithm, which built on the basis of meta-heuristics. It excels in identifying a population of sanitized results with good quality.
+$\bullet$~\textup{\emph{Stochastic Utility Loss Metric.}}~~It is very challenging to maintain the graph structure when the uncertain graph is modified to pursue anonymity. The structural distortion incurred is evaluated by the corresponding metric.  It plays the key role in utility preserving. Unfortunately, existing graph utility loss metrics such as graph edit distance~\cite{Liu_Towards_2008}, spectrum discrepancy~\cite{Ying_Randomizing_2008}, community reconstruction error~\cite{Wang2011} and shortest path discrepancy~\cite{Liu_Privacy_2009} are not suitable in the uncertain scenario because of the ignorance of edge probability. 
+% In this context, the discrepancy w.r.t standard uncertain graph reliability becomes a good criterion. It evaluates the connectivity difference in the context of the entire graph and meanwhile utilizes the possible world model. 
 
-The rest of the paper is organized as follows. In Section 2, we summarize related works and clarify our distinct  privacy  goal. In Section 3 we formulate the uncertain graph-anonymization problem. Sections 4 – 5 consider the anonymization problem in the context of uncertain graphs.  In Section 6 we apply our method to several real-world uncertain graphs, and demonstrate their efficiency and practical utility. 
+$\bullet$~\textup{\emph{Intractable Search Space.}}~~It is very challenging to find a sanitized graph with the desired level of privacy by as few graph operations as possible. 
+In the deterministic scenario, the problem is known to be NP-hard by edge additions and deletions~\cite{Hartung_Theory_2015}. 
+In the uncertain scenario, the edge modification is no longer a binary operation (addition/deletion), but can be infinite probability values. Exhaustive search is computationally intractable if the number of edges is large.
+ % Thus, we approximate the problem of interest via a randomized algorithm, which built on the basis of meta-heuristics. It excels in identifying a population of sanitized results with good quality.
+
+In this work, we propose a solution tailored towards uncertain graphs via incorporating possible world semantics, {\methodName}. 
+% {\methodName} is built on the basis of syntactic private notation. 
+It preserves as much the stochastic nature of the original uncertain graph as possible, while injecting enough structural noise to guarantee a chosen level of privacy against re-identification attacks.
+Specifically, we make the following contributions:
+\begin{itemize}
+\item To the best of our knowledge, we are the first to formulate the uncertain graph anonymization problem. 
+ We show the potential re-identification attack and present the corresponding privacy notion. 
+\item We propose an utility loss metric on the basis of generalized reliability. It evaluates the connectivity difference in the context of the entire graph and meanwhile utilizes the possible world model. 
+\item We propose a randomized algorithm with dual meta-heuristics. By incorporating the possible world semantics, it excels in identifying a population of sanitized results with good quality.
+\item We conduct extensive experimental studies to demonstrate efficiency and practical utility of our algorithms.
+\end{itemize}
+
+The rest of the paper is organized as follows. In Section 2, we summarize related works and clarify our distinct privacy goal. In Section 3 we formulate the uncertain graph-anonymization problem. Sections 4 – 5 consider the anonymization problem in the context of uncertain graphs.  In Section 6 we apply our method to several real-world uncertain graphs, and demonstrate their efficiency and practical utility. 
+

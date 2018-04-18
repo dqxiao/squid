@@ -22,7 +22,8 @@ The search starts with an initial guess of an upper bound $\sigma_{u}$, which is
 In reality, finding {\keobf} instances using a given parameter $\sigma$ is not that easy.
 The function {\genobf} utilizes the randomized search to handle intractable search space. Multiple attempts are performed (In our experiment, 5 attempts are performed.). Iff all the attempts fail, {\genobf} returns failure signals, otherwise, returns the found {\keobf} instance. 
 
-Each attempt begins by selecting a subset of edges, which will be subjected to alteration. Then, it assigns the deviation among selected edges and injects uncertainty. The randomization process heavily relies on a single meta-heuristic. 
+Each attempt begins by selecting a subset of edges, which will be subjected to alteration. Then, it assigns the deviation among selected edges and injects uncertainty. 
+% The randomization process heavily relies on a single meta-heuristic. 
 In particular, they suggest calibrating the perturbation applied to an edge $e$ according to the ``uniqueness" of the two nodes $u$ and $v$. 
 % The calculation of uniqueness is covered in a sequent section. 
 In brief, if both $u$ and $v$ are common nodes w.r.t the property, then $r_{e}$ should be very small; on the other hand, if $u$ and $v$ are outliers, then $r_{e}$ should be higher. Meanwhile, edges need to be sampled with the higher probability if they are adjacent to outliers. 
@@ -30,8 +31,10 @@ In brief, if both $u$ and $v$ are common nodes w.r.t the property, then $r_{e}$ 
 
 \subsection{Limitations} 
 The above-mentioned approach achieves the desired level of obfuscation with the small change in the data, thus maintaining high utility 
-However, the design heavily tailored towards the deterministic context. In the uncertain scenario, it suffers from following issues. First, its scheme does not consider the structural relevance of edges in critical edge selection/alteration steps, which leads to unnecessary structural distortion. 
-Second, its scheme assumes the existence of edges is known with certainty, thus fails to handle uncertain graphs where the existence of edges is probabilistic. All the operators, such as selection and alteration, need to be integrated with possible world semantics carefully.  
+However, the design heavily tailored towards the deterministic context. In the uncertain scenario, it suffers from following issues. 
+First, its scheme does not consider the structural relevance of edges in critical edge selection/alteration steps, which leads to unnecessary structural distortion. 
+Second, its scheme assumes the existence of edges is known with certainty, thus fails to handle uncertain graphs where the existence of edges is probabilistic. 
+All the operators, such as selection and alteration, need to be integrated with possible world semantics carefully.  
 We are left asking the question, \emph{how to generalize existing methods to the probabilistic context?}
 
 
