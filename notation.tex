@@ -3,7 +3,7 @@
 
 In this section, we provide background on uncertain graph, motivate the basic privacy attack, and formulate the uncertain graph anonymization problem. 
 
-\vspace{-2.5pt}
+\vspace{-4pt}
 \subsection{Uncertain Graph}
 \vspace{-2.5pt}
 An uncertain graph $\mathcal{G}=(V,E,\mathit{p})$, is defined over a set of nodes $V$, a set of edges $E$, and a set of probabilities $\mathit{p}$ of edge existence. Following the literature~\cite{Potamias_K_2010,Zhao_Detecting_2014,Colbourn_Colbourn_1987}, we assume possible-worlds semantics, and we consider the edge probabilities independent~\footnote{We leave the conditional probability model as a future
@@ -38,7 +38,7 @@ The probability of observing any possible world $G_i=(V,E_{G_i})$ is
 Obviously, simply removing the identities of the nodes before publishing the uncertain graph data does not guarantee privacy.  The structure of the uncertain graph itself, and in its basic form the degree of the nodes, can be revealing the identities of individuals. 
 In practice the adversary may have access to external information about the entities in the graphs. This information may be obtained by the adversary's malicious actions. For example, for the uncertain graph in Figure~\ref{fig:privacyAttack}, the adversary might know that ``Freq has three or more \textbf{trust} neighbors“. Such information allows adversary to narrow down the set of candidates in the sanitized graphs. For example, the statement partially re-identify Freq as $\lbrace 2,3,6 \rbrace$ with \textbf{probabilities} respectively. Different to the deterministic scenario,  there are varying posterior probabilities over candidate nodes $\lbrace 2,3,6 \rbrace$. The node is vulnerable to the re-identification risk. Entity Re-identification (ER) can lead to additional disclosures. In this paper, we focus on the ER attack as this attack is one of the most serious privacy problem. 
 
-
+\vspace{-4pt}
 \subsection{Privacy Notion}
 \label{sec:privacyNotion}
 To resist re-identification attacks, we adopt the $(k,\epsilon)$-obf, an syntactic privacy notion,
@@ -66,13 +66,16 @@ Though it is initially used to measure the privacy guarantee provided by an unce
 % if it $k$-obfuscates at least $(1-\epsilon)|V|$ nodes in $\mathcal{G}$. 
 % \label{def:obf}
 % \end{definition} 
-\vspace{-20pt}
+\vspace{-17pt}
 \subsection{Utility Loss Metric: Reliability Discrepancy}
 
-As a fundamental property, connectivity plays an important role in graph mining tasks such as nearest neighbor locating and graph clustering. The connectivity model is shown to yield a better graph representation than the degree sequence mode ~\cite{Liu_Privacy_2009}.  Connectivity discrepancy was proven to be a proper utility-loss metric in deterministic graph anonymization. 
+As a fundamental property, connectivity plays a vital role in graph mining tasks such as nearest neighbor locating and clustering. 
+The connectivity model can yield a better graph representation than the degree sequence model. 
+Motivated by the above, connectivity discrepancy is widely used to measure the structural difference between deterministic graphs. 
 
-In the uncertain scenario, the concept of reliability is used to generalize connectivity. It captures the probability that two given nodes are reachable over all possible worlds. Similarly, we  use reliability discrepancy as the utility-loss metric in the uncertain scenario. 
-
+The concept of reliability generalizes the connectivity concept uncertain scenario. 
+It captures the probability that two given nodes are reachable over all possible worlds, as shown in Def~\ref{d:reliability}. 
+Analogous to the deterministic case, we use reliability discrepancy as the utility-loss metric in the uncertain scenario, as outlined in Def~\ref{d:RD}. 
 \begin{definition}
     \textbf{Two-Terminal Reliability~\cite{Colbourn_Colbourn_1987}}~~Given an uncertain graph $\mathcal{G}$, and two distinct nodes $u$ and $v$  $\in~V$, the reliability of $(u,v)$ is defined as:
         \begin{equation*}
@@ -82,18 +85,16 @@ In the uncertain scenario, the concept of reliability is used to generalize conn
     \label{d:reliability}
 \end{definition}
 
-
-
 \theoremstyle{definition}
 \begin{definition}
     \textbf{Reliability Discrepancy (RD)}
-    The reliability discrepancy of graph $\tilde{\mathcal{G}}=(V,E, \tilde{\mathit{p}})$, 
+    The reliability difference between a sanitized output $\tilde{\mathcal{G}}$ and the original input $\mathcal{G}$, 
     denoted as $\Delta(\tilde{\mathcal{G}})$, 
-    w.r.t. the original graph  $\mathcal{G}$ is 
-    defined as the sum of the two-terminal reliability discrepancy over all node pairs $(u,v) \in V_\mathcal{G}$.
+    is defined as the sum of the two-terminal reliability discrepancy over all node pairs $(u,v) \in V_\mathcal{G}$.
     \begin{equation*}
         \Delta(\tilde{\mathcal{G}})=\sum_{(u,v) \in V_\mathcal{G} }|R_{u,v}(\mathcal{G})-R_{u,v}(\tilde{\mathcal{G}})|
     \end{equation*}
+    \label{d:RD}
 \end{definition}
 
 \subsection{Problem Statement}
@@ -102,7 +103,7 @@ Given the above foundation, we can now formulate our goal.
 \begin{problem}
      Given an uncertain graph $\mathcal{G}$ and desired anonymization parameters $k$ and $\epsilon$, 
      the objective is to find a  $(k,\epsilon)$-obf uncertain graph $\tilde{\mathcal{G}}$
-     with the minimal utility loss, as 
+     with the minimal utility loss,
      \vspace{-5pt}
      \begin{equation*}
              \begin{aligned}

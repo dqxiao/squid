@@ -1,7 +1,12 @@
 \section{The State-of-Art Approach}
-Before presenting our solution {\methodName} for uncertain graph sharing, we first describe the state-of-art approach~\cite{Boldi_Injecting_2012}. The main purpose of describing it is to separate the basic framework with the key idea of {\methodName}. 
+Before presenting our solution {\methodName} for uncertain graph sharing, we first describe the state-of-art approach ({\soaName})~\cite{Boldi_Injecting_2012}. 
+The main purpose of describing it is to separate the basic framework with the key idea of {\methodName}. 
+They differ in how they represent the graph property and how they perform mutation. 
 
-\subsection{Overview}~~In general, it obfuscates graph data $G=(V,E)$ by adding or removing edges \emph{partially}. For each edge $e$, it assigns a probability deviation $r_{e}$, where $r_{e} \leftarrow R(\sigma)$. In specific, the uncertainty injecting scheme proceeds as follows:
+\subsection{Overview}~~
+The {\soaName} method obfuscates the graph data by adding or removing edges \emph{partially}. 
+For each edge $e$, it assigns a probability deviation $r_{e}$, where $r_{e} \leftarrow R(\sigma)$. 
+In particular, the uncertainty injecting scheme proceeds as follows:
 \begin{equation}
 	p(e) =
 	\begin{cases}
@@ -11,7 +16,11 @@ Before presenting our solution {\methodName} for uncertain graph sharing, we fir
 	\label{eq:inject}
 \end{equation}
 
-Boldi {\etal}~\cite{Boldi_Injecting_2012} suggest the use of the truncated normal distribution with mean 0 and variance $\sigma^2$ for generating distribution of $r_{e}$. While, $R$ could in principle be any distribution. As the standard deviation $\sigma$ decreases, a greater mass of $R_{\sigma}$ will concentrate near $r_{e}=0$.  Then, the amount of injected noise and consequent structural distortion  will be smaller. Aiming at high utility, it aims at injecting the minimal amount of uncertainty need to achieve the required obfuscation. 
+The most widely known member of generating distribution $R_{\sigma}$ is the truncated normal distribution with mean 0 and variance $\sigma^2$. 
+While, $R$ could in principle be any distribution. 
+As the standard deviation $\sigma$ decreases, a greater mass of $R_{\sigma}$ will concentrate near $r_{e}=0$.  
+Then, the amount of injected noise and consequent structural distortion will be smaller. 
+Aiming at high utility, {\soaName} aims at injecting the minimal amount of uncertainty need to achieve the required obfuscation. 
 Computing the minimal amount of uncertainty is achieved via a binary search on the value of standard deviation $\sigma$, as outlined in Algorithm~\ref{alg:obf}. 
 \input{mainRoutine.tex}
 
