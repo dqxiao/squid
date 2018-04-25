@@ -4,7 +4,7 @@ The main purpose of describing it is to separate the basic framework with the ke
 They differ in how they represent the graph property and how they perform mutation. 
 
 \subsection{Overview}~~
-The {\soaName} method obfuscates the graph data by adding or removing edges \emph{partially}. 
+The {\soaName} method obfuscates the (deterministic) graph data by adding or removing edges \emph{partially}. 
 For each edge $e$, it assigns a probability deviation $r_{e}$, where $r_{e} \leftarrow R(\sigma)$. 
 In particular, the uncertainty injecting scheme proceeds as follows:
 \begin{equation}
@@ -21,17 +21,17 @@ While, $R$ could in principle be any distribution.
 As the standard deviation $\sigma$ decreases, a greater mass of $R_{\sigma}$ will concentrate near $r_{e}=0$.  
 Then, the amount of injected noise and consequent structural distortion will be smaller. 
 Aiming at high utility, {\soaName} aims at injecting the minimal amount of uncertainty need to achieve the required obfuscation. 
-Computing the minimal amount of uncertainty is achieved via a binary search on the value of standard deviation $\sigma$, as outlined in Algorithm~\ref{alg:obf}. 
+Thus, it calibrates the minimal amount of uncertainty via a binary search on the value of standard deviation $\sigma$, as outlined in Algorithm~\ref{alg:obf}.  
 \input{mainRoutine.tex}
 
-The search flow is determined by the function {\genobf}. The function {\genobf} handles finding {\keobf} instances using a given parameter $\sigma$. And, it either returns the found {\keobf} instance or failure signals.
+The search flow is determined by the function {\genobf}. The function {\genobf} handles the search of {\keobf} instances using a given standard deviation parameter $\sigma$. It either returns the found {\keobf} instance or failure signals.
 The search starts with an initial guess of an upper bound $\sigma_{u}$, which is iterative doubled until a {\keobf} instance is found. Then, the binary search is performed over the range $[0,\sigma_{u}]$. The binary search terminates until the search interval is sufficiently short. The algorithm outputs the best {\keobf} found (the last one that was successfully generated).
 
 \subsection{The function {\genobf}}
 In reality, finding {\keobf} instances using a given parameter $\sigma$ is not that easy.
 The function {\genobf} utilizes the randomized search to handle intractable search space. Multiple attempts are performed (In our experiment, 5 attempts are performed.). Iff all the attempts fail, {\genobf} returns failure signals, otherwise, returns the found {\keobf} instance. 
 
-Each attempt begins by selecting a subset of edges, which will be subjected to alteration. Then, it assigns the deviation among selected edges and injects uncertainty. 
+Each attempt begins by selecting a subset of edges subject to alteration. Then, it assigns the deviation among selected edges and injects uncertainty. 
 % The randomization process heavily relies on a single meta-heuristic. 
 In particular, they suggest calibrating the perturbation applied to an edge $e$ according to the ``uniqueness" of the two nodes $u$ and $v$. 
 % The calculation of uniqueness is covered in a sequent section. 

@@ -42,19 +42,22 @@
 \newcommand{\ie}[0]{\textit{i.e.}}
 \newcommand{\eg}[0]{\textit{e.g.}}
 \newcommand{\etal}[0]{\textit{et al.}}
-% \newcommand{\omit}
 
 
 \newcommand{\keobf}{\textit{$(k,\epsilon)$-obf}}
 \newcommand{\argmin}{\operatornamewithlimits{argmin}}
 \newcommand{\genobf}{\texttt{\textbf{genObf}}}
+\newcommand{\ere}{$\mathcal{E}RR-$eval}
+\newcommand{\pg}{\mathcal{G}}
+\newcommand{\Constraint}{$\mathcal{C}$}
+\newcommand{\Number}{\|v\|}
 
 
 \theoremstyle{plain}
-\newtheorem{theorem}{Theorem} 
 \newtheorem{definition}{Definition}
 \newtheorem{problem}{Problem}
 \newtheorem{example}{Example}
+\newtheorem{observation}{Observation}
 \newtheorem{lemma}{Lemma}
 
 \newcommand{\methodName}{Squid}
@@ -91,7 +94,7 @@ Worcester, United States of America\\
 %
 
 \begin{abstract}  
-Many graphs in real-world applications are not deterministic but are uncertain. Related research requires open access to such uncertain graph datasets. While sharing these datasets often risks exposing sensitive data to the public. Current works mainly concern about the privacy issue with deterministic graph sharing.  The uncertain scenario is overlooked. 
+Many graphs in real-world applications, such as social network and business to business network, are not deterministic but are uncertain. Related research requires open access to such uncertain graph datasets. While sharing these datasets often risks exposing sensitive data to the public. Current works mainly concern about privacy issues with deterministic graph sharing.  The uncertain scenario is overlooked. 
 
 We first show conventional methods are not applicable for uncertain graph sharing. By disregarding the possible world semantic, they significantly disrupt the stochastic structure. Our work seeks a solution to share meaningful probabilistic graphs without compromising user privacy. We develop a syntactically private algorithm, Squid, for solving this problem. It integrates the possible world semantic into the core of anonymization. It enables a fine-grained, uncertainty-aware control over the injected noise. We apply our method to real uncertain graphs and show its efficiency and practical utility. 
 % not only the statstics but also real-world applications 
