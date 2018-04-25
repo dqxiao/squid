@@ -31,12 +31,11 @@ The uniqueness criterion was used to measure how unique a given node is among al
 For a given node, its uniqueness score is the inverse of the commonness score of its property value $w$.
 While, the commonness score of $w$ amounts to the weighted average distance among all other property values. 
 
-The conventional method merely formulates  node property as discrete values.
-It relies on the geometric distance function to measure their distance.  
+The conventional method merely formulates node properties as discrete values and relies on the geometric distance function to measure their distance.  
 Thus, it fails to handle our problem where the property values are stochastic.   
 In this work, we extend the preliminary version for handing the stochastic case. 
-We consider the use of probability distributions, which are essential characteristics of uncertain objects, in the measuring similarity between uncertain objects. 
-We systematically model uncertain objects in both continuous and discrete domains as continuous and discrete random variables, respectively.
+We consider the use of probability distributions, which are essential characteristics of uncertain property values, in the measuring similarity between uncertain property values. 
+We systematically model uncertain property values in both continuous and discrete domains as continuous and discrete random variables, respectively.
 We use the well known Kullback-Leibler divergence to measure the distance between random variables with parameterized distributions. 
 The generalized version of uniqueness score can then be formalized as
 \begin{definition}
@@ -54,14 +53,16 @@ We set $\theta=\sigma$ as the injected noise blurs the meta distribution of prop
  
 \subsubsection{Generalized Edge Relevance}
 
-Note that, alteration over a single edge would produce local structural change and send ripples through the rest of the graph. 
-Observe that edges with different roles will incur significantly different structural changes even with the same amount of injected noise. 
-Targets at the high utility, we should penalize modification over structurally critical edges.  Thus, we need measure the edge relevance w.r.t graph structure. 
+It is clear that alteration over a single edge would produce local structural change and send ripples through the rest of the graph. 
+The incurred structural distortion varies on the topological role of the edge subjecting to alteration, even with the same amount of alteration. 
+% Observe that edges with different roles will incur significantly different structural changes even with the same amount of injected noise. 
+Targets at the high utility, we should penalize modification over structurally critical edges.  
+Thus, we need measure the edge relevance w.r.t graph structure. 
 
 There are many potential ways to measure it. 
 Importantly, the metric must be fitted to the context of uncertain graphs.
 Inspired by the concept of cut-edge, we measure the edge relevance of a given edge $e$
-as the amount of structural distortion, measured by reliability discrepancy, caused by the unit noise subjects to the edge $e$. 
+as the amount of structural distortion, measured by reliability discrepancy, caused by the unit noise subjects to the edge $e$, as follow. 
 \begin{equation*}
     \mathcal{ERR}({e}) = \lim_{r_{e} \rightarrow 0} \frac{\Delta(\mathcal{G}+r_{e})}{r_{e}} 
                       = \sum_{u,v} \frac{|R_{u,v}(\mathcal{G}+r_{e}) -R_{u,v}(\mathcal{G})|} {r_{e}}
@@ -71,15 +72,17 @@ In deterministic graphs, a cut-edge of a graph is an edge whose deletion increas
 In probabilistic graphs, $\mathcal{ERR}$ is used to generalize this concept by quantifying the stochastic impact of adding/deleting edge partially over the connectivity of all the possible worlds.
 while the cut-edge is a binary classification, the $ERR$ value lies in the continuous range, and quantify the probability if the connected pairs holds in a possible world. 
 
-% In order to explore this point further, we have illustrate a probabilistic graph in Figure.
-The factorization lemma~\cite{Jin_Distance_2011} indicates
-\begin{align*}
-    R_{u,v}(\mathcal{G}+r_{e}) -R_{u,v}(\mathcal{G}) = r_{e} \cdot \big[ R_{u,v}(\mathcal{G}_{e})-R_{u,v}(\mathcal{G}_{\hat{e}}) \big]
-\end{align*}
-Then, the edge relevance $\mathcal{ERR}$ can then formulate as
-\begin{equation*}
-    \mathcal{ERR}(e) = \sum_{u,v} R_{u,v}(\mathcal{G}_{e}) \big- \sum_{u,v} R_{u,v}(\mathcal{G}_{\bar{e}})
-\end{equation*}
+In order to explore this point further, we have illustrate a probabilistic graph in Figure~\ref{}. 
+
+% switch into the lemma format 
+% The factorization lemma~\cite{Jin_Distance_2011} indicates
+% \begin{align*}
+%     R_{u,v}(\mathcal{G}+r_{e}) -R_{u,v}(\mathcal{G}) = r_{e} \cdot \big[ R_{u,v}(\mathcal{G}_{e})-R_{u,v}(\mathcal{G}_{\hat{e}}) \big]
+% \end{align*}
+% Then, the edge relevance $\mathcal{ERR}$ can then formulate as
+% \begin{equation*}
+%     \mathcal{ERR}(e) = \sum_{u,v} R_{u,v}(\mathcal{G}_{e}) \big- \sum_{u,v} R_{u,v}(\mathcal{G}_{\bar{e}})
+% \end{equation*}
 
 Observe that, $\mathcal{ERR}(e)$ amounts to the number difference of connected node pairs between two neighbor uncertain graphs $\mathcal{G}_{e}$ and $\mathcal{G}_{\bar{e}}$, 
 where $\mathcal{G}_{e}$ and $\mathcal{G}_{\bar{e}}$ are identical to $\mathcal{G}$ with the exception that $p(e)=1$ in the former and $p(e)=0$ in the later. 
